@@ -1,0 +1,13 @@
+# API keys — never commit
+.env
+
+# Scratch space
+.tmp/
+
+# Local databases
+data/*.db
+data/*.sqlite
+
+# OS files
+.DS_Store
+Thumbs.db
