@@ -47,6 +47,10 @@ type: reference
 | `receiving-code-review` | dev | I got feedback, review came back, handle this review | Handle review feedback with technical rigor |
 | `finishing-a-development-branch` | dev | I'm done implementing, merge this, finish the branch, wrap up | Merge, PR, or cleanup after implementation |
 | `using-git-worktrees` | dev | isolate this work, start feature work, new worktree, keep this separate | Create isolated git worktrees for feature work |
+| `qa`        | dev     | qa this, test coverage, edge cases, before I ship          | QA pass — tests, untested paths, regressions        |
+| `cso`       | dev     | security check, is this safe to ship, cso                 | Security review — OWASP, secrets, permissions        |
+| `ship`      | dev     | ship this, release, deploy, tag this                       | Release — version bump, changelog, git tag           |
+| `retro`     | dev     | retro, retrospective, end of sprint, what did we learn     | Sprint retro — shipped, missed, next focus           |
 
 ---
 
@@ -59,6 +63,9 @@ type: reference
 | `systematic-debugging` | dev | bug, error, this is broken, something's wrong, failing, unexpected behavior | Diagnose bugs before proposing fixes |
 | `verification-before-completion` | dev | is this done yet, let me verify, check before I commit, make sure this works, verify this works | Verify before claiming done — evidence first |
 | `writing-skills` | system | create a skill, new skill, update this skill, improve this skill | Create or improve skills — always update skills-map after |
+| `office-hours` | dev  | I'm stuck, think this through, office hours, help me reason | Unstructured problem-solving session               |
+| `browse`       | dev  | browse, open URL, scrape, automate this page, go to URL    | Real Chromium automation via Playwright              |
+| `conductor`    | dev  | run in parallel, spin up agents, conductor, multiple workstreams | Parallel Claude Code sessions for independent tasks |
 
 ---
 
