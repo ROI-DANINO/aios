@@ -87,3 +87,12 @@ Confirm: `Brief saved. Go build.`
 - **`data/` doesn't exist** — Create it before writing.
 - **Goals file looks stale (30+ days old)** — Flag: "my-goals.md hasn't been updated recently — brief is based on current content."
 - **Argument passed but no matching threads** — Say: "Nothing in your open threads matches '[arg]' — proposing from goals instead."
+
+## Next Step
+
+After your session focus is confirmed: use `/note "text"` to capture decisions and blockers mid-session. When done, run `/session-close` to log the session and extract memory.
+
+## See Also
+
+- `/note` — mid-session capture
+- `/session-close` — end of session log and memory extraction

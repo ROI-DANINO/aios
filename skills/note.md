@@ -61,3 +61,8 @@ Do not summarise. Do not add commentary. Just confirm and stop.
 - **No project context** — Default to "Captionate v3".
 - **Just a tag, no text** — Ask: "What's the note?"
 - **Very long note** — Log without truncation. If 3+ sentences, suggest: "This might belong in a deliverable — want me to save it there instead?"
+
+## See Also
+
+- `/daily-brief` — session start, sets the agenda this note feeds into
+- `/session-close` — reads notes.md at end of session to extract memory

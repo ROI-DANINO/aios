@@ -1,13 +1,13 @@
 ---
 name: session-close
 description: >
-  End-of-session wrap-up. Asks what got done, what's blocked, and what's next.
-  Writes a session log to data/session-log-YYYY-MM-DD.md, appends open threads tagged
-  #next to data/notes.md, and optionally flags anything that should become a formal
-  deliverable. Use when user says "/session-close", "wrap up", "I'm done for today",
-  "closing out", "end session", or "signing off".
+  End-of-session wrap-up. Derives what happened from git log, session context, and
+  conversation history — no questions asked. Accepts an optional note as an argument.
+  Writes a session log to data/session-log-YYYY-MM-DD.md and extracts memory.
+  Use when user says "/session-close", "wrap up", "I'm done for today",
+  "closing out", "end session", "signing off", "bye", or similar.
 user-invocable: true
-argument-hint: "[optional]"
+argument-hint: "[optional note]"
 ---
 
 # Session Close
@@ -16,32 +16,22 @@ End clean. Know where you stopped. Come back faster.
 
 ## When to Trigger
 
-- User says "/session-close", "wrap up", "I'm done", "closing out", "end session", "signing off"
+- User says "/session-close", "wrap up", "I'm done", "closing out", "end session", "signing off", "bye"
 - End of any working session
 - Before stepping away for more than a few hours
 
 ## Process
 
-### Phase 1: Three questions
+### Phase 1: Derive session context (silent)
 
-Ask in one block:
+Do NOT ask questions. Infer from:
 
-> **Closing out. Three quick ones:**
-> 1. What did you ship or move forward today?
-> 2. What's blocked or unresolved?
-> 3. What's the first thing you're picking up next session?
+1. **Conversation history** — what was discussed, built, or decided this session
+2. **`git log --oneline -10`** in any active project dirs mentioned this session
+3. **`data/daily-brief-YYYY-MM-DD.md`** — what was the stated focus for today
+4. **Argument passed** — if user passed a note (e.g. `/session-close fixed the auth bug`), include it verbatim in the Notes field
 
-Accept short answers. One follow-up max if something is too vague to be actionable: "On what specifically?"
-
-### Phase 2: Check for deliverable (optional)
-
-Scan the answers. If anything sounds like a decision locked or a plan finalized, ask once:
-
-> "Sounds like [X] might be worth formalizing — should I save that as a deliverable?"
-
-If yes: create `deliverables/plan-[topic]-YYYY-MM-DD.md` with a one-paragraph summary. If no: skip. Don't ask twice.
-
-### Phase 3: Write the session log
+### Phase 2: Write the session log
 
 Write `data/session-log-YYYY-MM-DD.md`:
 
@@ -49,16 +39,16 @@ Write `data/session-log-YYYY-MM-DD.md`:
 # Session Log — YYYY-MM-DD
 
 ## What Shipped
-[Roi's answer to Q1]
+[Inferred from conversation and git log]
 
 ## Blocked / Unresolved
-[Roi's answer to Q2, or "None"]
+[Anything left open or explicitly flagged — or "None"]
 
 ## Next Session — First Task
-[Roi's answer to Q3]
+[Last open thread or stated next step — or "Not specified"]
 
 ## Notes
-[Any extra context, or "None"]
+[Argument passed by user, or "None"]
 ```
 
 If a file for today already exists (multiple sessions in one day), append with timestamp:
@@ -72,40 +62,40 @@ If a file for today already exists (multiple sessions in one day), append with t
 ...
 ```
 
-### Phase 4: Update notes.md
+### Phase 3: Update notes.md
 
-Append to `data/notes.md` for each next task:
+If a clear next task was inferred, append to `data/notes.md`:
 
 ```
 ### [YYYY-MM-DD] — [Project]
-[next task text] #next
+[next task] #next
 ```
 
-### Phase 5: Memory extraction
+Skip if nothing actionable was inferred.
 
-Scan the session answers for anything that should persist across sessions. Extract only what's non-obvious and wouldn't be derivable from the code or git log.
+### Phase 4: Memory extraction
+
+Scan the session for anything that should persist across sessions. Extract only what's non-obvious and wouldn't be derivable from the code or git log.
 
 **Extract if present:**
 - A decision that was made and the reasoning behind it (→ `project` memory)
-- A pattern that worked or failed that you'd want to repeat or avoid (→ `feedback` memory)
-- A project milestone completed or a new blocker surfaced (→ `project` memory)
+- A pattern that worked or failed (→ `feedback` memory)
+- A project milestone completed or new blocker surfaced (→ `project` memory)
 - Something learned about how Roi likes to work (→ `user` memory)
 
 **Skip:**
-- Routine task completions ("fixed the bug") — these are in the session log
+- Routine task completions — these are in the session log
 - Anything already in MEMORY.md
 - Vague observations with no actionable consequence
 
-For each item worth saving: write it to `memory/[type]_[topic].md` using the standard frontmatter format (`name`, `description`, `type`), then add a pointer line to `memory/MEMORY.md`.
+For each item worth saving: write it to `memory/[type]_[topic].md` using the standard frontmatter format, then add a pointer line to `memory/MEMORY.md`.
 
-If nothing worth extracting: skip silently. Don't note the absence.
-
-### Phase 6: Close out
+### Phase 5: Close out
 
 Confirm in two lines:
 
 ```
-Session logged. [next task] is queued for tomorrow.
+Session logged. [next task or "Nothing queued"] is up next.
 Come back fresh.
 ```
 
@@ -113,9 +103,12 @@ No summary. No motivational sign-off. Log and done.
 
 ## Edge Cases
 
-- **One-word answers** — Log as-is. Don't pad.
-- **Nothing shipped** — Log honestly: "No features shipped. Research/debugging session."
-- **Multiple blockers** — List all. Don't prioritise for Roi.
-- **"Not sure" on deliverable question** — Skip it. Don't push.
+- **Nothing in conversation history** — Log: "No activity recorded this session."
+- **Multiple blockers** — List all.
 - **Multiple sessions in one day** — Append, never overwrite.
 - **`data/` doesn't exist** — Create it. Never fail.
+
+## See Also
+
+- `/daily-brief` — run at the start of the next session to pick up where you left off
+- `/note` — mid-session capture that feeds into this log
