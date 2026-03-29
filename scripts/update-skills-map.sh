@@ -47,9 +47,21 @@ for skill_file in "$SKILLS_DIR"/*.md; do
     continue
   fi
 
-  # Extract description from frontmatter
-  skill_desc=$(awk '/^---/{p++} p==1 && /^description:/{$1=""; print substr($0,2); exit}' "$skill_file" 2>/dev/null || echo "No description")
-  skill_desc=$(echo "$skill_desc" | tr -d '>' | xargs)
+  # Extract description from frontmatter (handles single-line and multiline `>` YAML)
+  skill_desc=$(awk '
+    /^---/{p++; next}
+    p==1 && /^description:/{
+      val=$0; sub(/^description:[[:space:]]*/,"",val); gsub(/^>[[:space:]]*/,"",val)
+      if (val != "" && val != ">") { print val; exit }
+      in_desc=1; next
+    }
+    p==1 && in_desc {
+      if (/^[a-z_]/) exit
+      line=$0; sub(/^[[:space:]]]+/,"",line)
+      if (line != "") { print line; exit }
+    }
+  ' "$skill_file" 2>/dev/null || echo "No description")
+  skill_desc=$(echo "$skill_desc" | xargs)
 
   # Append to map below marker
   echo "| \`$skill_name\` | utility | <!-- TODO: add triggers --> | $skill_desc | <!-- TODO: review placement -->" >> "$MAP_FILE"
