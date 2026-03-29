@@ -21,13 +21,13 @@ When this skill is loaded, read `skills/skills-map.md` in full. Then apply the m
 Apply these rules in order. Stop at the first match.
 
 ### 1. Keyword Match
-Scan the user's message for exact or near-exact phrases from the **Triggers** column in `skills-map.md`. If found, invoke that skill.
+Scan the user's message for phrases from the **Triggers** column in `skills-map.md`. Triggers are examples, not exhaustive lists — match on semantic similarity where all key nouns and verbs from the trigger are present in the user's message. If two or more skills match at this step, proceed to Tie-Breaking before invoking.
 
 ### 2. Intent Match
-If no keyword match, consider what the user is trying to accomplish. Map that intent to a skill's "What it does" description. If a skill clearly fits the goal, invoke it.
+If no keyword match, consider what the user is trying to accomplish. Map that intent to a skill's "What it does" description. Only match if you can identify a single skill without hesitation. If two or more skills are plausible, proceed to Rule 3.
 
 ### 3. Phase Awareness
-If the session context is dev work (files mentioned, a plan exists, code being discussed), dev skills take priority over business skills when the trigger is ambiguous.
+If the session context is dev work (files mentioned, a plan exists, code being discussed), dev skills take priority over business skills when the trigger is ambiguous. If Phase Awareness still leaves multiple candidate skills, apply Tie-Breaking before invoking.
 
 ### 4. No Double-Fire
 If a skill was already invoked earlier in this session, do not re-invoke it unless the context has clearly shifted to a new task or phase. Use judgment — a new feature request after finishing one is a clear shift; a follow-up question is not.
