@@ -17,7 +17,7 @@ type: reference
 |-------|--------|----------|--------------|
 | `using-superpowers` | system | session start, new conversation, first message | Loads skill rules and routing behavior |
 | `daily-brief` | business | start of day, what should I work on, morning, orient me, what's on my plate | Reads goals, surfaces yesterday's notes, proposes focused agenda |
-| `init` | system | /init, set up this project, tidy this project, onboard this project, initialize, help me organize | Scans project dir, interviews user, proposes tidy structure, moves files with approval, registers in AIOS memory |
+| `init` | system | /init, set up this project, tidy this project, onboard this project, initialize, help me organize, starting fresh on this project, starting a new project, help me set up this project | Scans project dir, interviews user, proposes tidy structure, moves files with approval, registers in AIOS memory |
 
 ---
 
@@ -62,7 +62,7 @@ type: reference
 | `receiving-code-review` | dev | I got feedback, review came back, handle this review | Handle review feedback with technical rigor |
 | `review` | dev | review my code, smart review, multi-mode review | Intelligent multi-mode review — tracks what's been reviewed, does the right thing |
 | `investigate` | dev | investigate this module, look into this, drill down, freeze and investigate | Auto-freezes to module, safety restrictions on |
-| `finishing-a-development-branch` | dev | I'm done implementing, merge this, finish the branch, wrap up | Merge, PR, or cleanup after implementation |
+| `finishing-a-development-branch` | dev | I'm done implementing, done with this feature, merge this, finish the branch, wrap up, all done here | Merge, PR, or cleanup after implementation |
 | `using-git-worktrees` | dev | isolate this work, start feature work, new worktree, keep this separate | Create isolated git worktrees for feature work |
 | `careful` | dev | be careful, safety mode, prod mode, destructive command | Warns before rm -rf, DROP TABLE, force-push, git reset --hard |
 | `freeze [dir]` | dev | freeze this dir, lock edits to, restrict to | Lock edits to a single directory |
@@ -71,7 +71,7 @@ type: reference
 | `qa`        | dev     | qa this, test coverage, edge cases, before I ship          | QA pass — tests, untested paths, regressions        |
 | `qa-only`   | dev     | qa without fixes, check only, qa read only                 | QA check without automatic fixes                    |
 | `cso`       | dev     | security check, is this safe to ship, cso                 | Security review — OWASP, secrets, permissions        |
-| `ship`      | dev     | ship this, release, deploy, tag this                       | Release — version bump, changelog, git tag           |
+| `ship`      | dev     | ship this, release, deploy, tag this, ready to ship, time to release, let's release | Release — version bump, changelog, git tag           |
 | `setup-deploy` | dev  | configure deploy, set up deployment, one-time deploy setup | Detects platform, production URL, deploy commands — one-time setup |
 | `land-and-deploy` | dev | land this, merge and deploy, deploy after review       | Merge PR + monitor production after code review passes |
 | `canary`    | dev     | watch production, canary deploy, monitor after deploy, post-deploy monitor | Monitor production for 30 minutes post-deploy |
@@ -95,7 +95,7 @@ type: reference
 |-------|--------|----------|--------------|
 | `note` | utility | note this, remember this, capture this, jot down | Quick mid-session capture to notes.md |
 | `dev-audit` | dev | where am I, what's left, what phase am I in, phase status, what should I work on | Audit current dev phase — progress, blockers, next steps |
-| `systematic-debugging` | dev | bug, error, this is broken, something's wrong, failing, unexpected behavior | Diagnose bugs before proposing fixes |
+| `systematic-debugging` | dev | bug, error, this is broken, something's broken, something's wrong, something isn't working, not working, failing, unexpected behavior | Diagnose bugs before proposing fixes |
 | `verification-before-completion` | dev | is this done yet, let me verify, check before I commit, make sure this works, verify this works | Verify before claiming done — evidence first |
 | `writing-skills` | system | create a skill, new skill, update this skill, improve this skill | Create or improve skills — always update skills-map after |
 | `office-hours` | dev  | I'm stuck, think this through, office hours, help me reason | Unstructured problem-solving session               |
@@ -113,7 +113,7 @@ type: reference
 
 | Skill | Domain | Triggers | What it does |
 |-------|--------|----------|--------------|
-| `session-close` | business | wrap up, end session, I'm done for today, close out, session summary | End-of-session log, open threads, next session setup |
+| `session-close` | business | wrap up, end session, I'm done for today, close out, session summary, closing my laptop, done for now, signing off, logging off, heading out | End-of-session log, open threads, next session setup |
 
 ---
 
