@@ -155,19 +155,3 @@ Run `/pod-review` to review the diff and approve or reject the merge.
 - **manifest.md already exists with status in-progress** — Block with: "A pod run is already in progress. Check `.tmp/conductor-log-*.txt` or run `/pod-review`."
 
 ---
-
-## After Creating the File
-
-Verify:
-```bash
-head -10 /home/roking/Desktop/Projects/aios/skills/pod.md
-```
-Expected: `---`, `name: pod`, `description:`, `user-invocable: true` all present.
-
-Commit:
-```bash
-git -C /home/roking/Desktop/Projects/aios add skills/pod.md
-git -C /home/roking/Desktop/Projects/aios commit -m "feat: add /pod skill — Dev Pod entry point with Gate 1 approval"
-```
-
-Note: the update-skills-map.sh hook will fire automatically on write — that's expected, not an error.

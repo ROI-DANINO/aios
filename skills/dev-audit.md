@@ -55,6 +55,29 @@ git -C {project_root} log --oneline -10
 - Open questions section
 - Last updated date
 
+### Phase 3b: Pod Mode (if active)
+
+Run this check before outputting the Phase 3 report:
+```bash
+cat memory/pod-manifest.md 2>/dev/null | grep -E "^\*\*Task:\*\*|\*\*Status:\*\*"
+```
+
+If `memory/pod-manifest.md` exists, append this section to the audit report:
+
+```
+### Pod Status
+- **Task:** {task name from manifest}
+- **Status:** {status value from manifest}
+- **Agents:** {count .tmp/conductor-result-*.md files} result files found
+- **Next action:**
+  - pending-gate-1 → "Run `/pod` to review and approve the task split."
+  - in-progress → "Agents are running. Check `.tmp/conductor-log-*.txt` for progress."
+  - pending-gate-2 → "Agents complete. Run `/pod-review` to review the diff."
+  - approved → "PR is open. Review and merge on GitHub."
+```
+
+If `memory/pod-manifest.md` does not exist, skip this section entirely.
+
 ### Phase 3: Produce the Report
 
 Output exactly this structure:
@@ -97,29 +120,6 @@ After the report, give one routing instruction:
 | Tests failing | "Run `/systematic-debugging` — start with the failing module: {module name}." |
 | Open questions blocking code | "Answer these before writing more code: {list}. Use `/superpowers:brainstorming` if stuck." |
 | Feature work available | "Next task: {specific item from Not Done list}. Start with `/superpowers:writing-plans`." |
-
-### Phase 3b: Pod Mode (if active)
-
-Run this check before outputting the Phase 3 report:
-```bash
-cat memory/pod-manifest.md 2>/dev/null | grep -E "^\*\*Task:\*\*|\*\*Status:\*\*"
-```
-
-If `memory/pod-manifest.md` exists, append this section to the audit report:
-
-```
-### Pod Status
-- **Task:** {task name from manifest}
-- **Status:** {status value from manifest}
-- **Agents:** {count .tmp/conductor-result-*.md files} result files found
-- **Next action:**
-  - pending-gate-1 → "Run `/pod` to review and approve the task split."
-  - in-progress → "Agents are running. Check `.tmp/conductor-log-*.txt` for progress."
-  - pending-gate-2 → "Agents complete. Run `/pod-review` to review the diff."
-  - approved → "PR is open. Review and merge on GitHub."
-```
-
-If `memory/pod-manifest.md` does not exist, skip this section entirely.
 
 ## Edge Cases
 
