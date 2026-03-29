@@ -108,6 +108,7 @@ type: reference
 | `codex`        | dev  | codex review, adversarial review, ask codex, second opinion | Three OpenAI Codex review modes: code review, adversarial, open consultation |
 | `benchmark`    | dev  | benchmark this, performance test, measure speed            | Performance benchmarking and analysis                |
 | `gstack-upgrade` | system | update gstack, upgrade skills, latest gstack           | Update gstack to latest version                      |
+| `skill-scan`   | system | /skill-scan, audit skills, scan skills, skill audit, check skills, what skills are broken, what skills are missing | Full skill audit — finds missing registrations, chain gaps, duplicates. Saves tiered report + feeds backlog. Optional interactive triage per finding. |
 
 ---
 
