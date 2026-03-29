@@ -120,3 +120,18 @@ type: reference
 ---
 
 <!-- NEW SKILLS APPENDED BELOW BY update-skills-map.sh — REVIEW PLACEMENT -->
+
+---
+
+## Workflow Chains
+
+Quick reference for skill sequencing. Each `→` is a hard handoff defined in the skill file.
+
+| Chain | Sequence |
+|---|---|
+| **Session loop** | `/daily-brief` → (work) → `/note` → `/session-close` → next day `/daily-brief` |
+| **Dev pipeline** | `/dev-audit` → `/qa` → `/cso` → `/ship` → `/retro` |
+| **Project setup** | `/init` → `/system-architect` → `/business-setup` or dev pipeline |
+| **Business** | `/business-setup` → `/pod-mapper` → `/pod` |
+| **Multi-agent** | `/pod` → `/pod-review` → `superpowers:finishing-a-development-branch` |
+| **UX** | `/ux-gate` → (build) → `/ux-scan` → `/dev-audit` |
