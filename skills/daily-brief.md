@@ -1,0 +1,89 @@
+---
+name: daily-brief
+description: >
+  Session-start orientation. Reads context/my-goals.md, scans data/notes.md for
+  yesterday's notes, checks deliverables/ for open plans, and proposes a focused
+  session agenda — 1 to 3 tasks max. Confirms focus with Roi, then writes the brief
+  to data/daily-brief-YYYY-MM-DD.md. Use when user says "/daily-brief", "start my
+  session", "what should I work on", "give me my brief", "orient me", or at the start
+  of any working session.
+user-invocable: true
+argument-hint: "[optional focus area, e.g. 'backend']"
+---
+
+# Daily Brief
+
+Session start. Cut the fog. Pick your focus before you open a file.
+
+## When to Trigger
+
+- User says "/daily-brief", "start my session", "orient me", "what should I work on today"
+- Beginning of any working session — before any feature work or task picking
+- User feels directionless or wants rails before starting
+
+## Process
+
+### Phase 1: Load context (silent — do not narrate this to the user)
+
+1. Read `context/my-goals.md`. Note the top 3 priorities.
+2. Read `data/notes.md`. Find all entries from yesterday. Extract any tagged #blocker, #next, or #decision.
+3. List files in `deliverables/`. Flag any that look like open plans — filenames containing "plan", "pod-map", "brief", or "v3".
+4. If an argument was passed (e.g. `/daily-brief backend`), treat it as a focus constraint.
+
+### Phase 2: Propose the agenda
+
+Present this in a compact block. No preamble. Lead with yesterday's threads:
+
+```
+**Yesterday's open threads:**
+- [notes tagged #next or #blocker, if any — or "Nothing flagged from yesterday."]
+
+**Open deliverables:**
+- [open plans from deliverables/, or "None."]
+
+**Proposed focus for today — pick 1:**
+1. [Most important task tied to top goal in my-goals.md]
+2. [Second option if genuinely ambiguous]
+3. [Third option only if 1 and 2 are both blocked]
+```
+
+3 tasks max. If everything is Captionate v3, pick the highest-priority unblocked sub-task.
+
+### Phase 3: Confirm or adjust
+
+Ask exactly this:
+
+> "Which one are you starting with — or does something else take priority today?"
+
+Wait. Do not suggest more options.
+
+### Phase 4: Write the brief
+
+Write `data/daily-brief-YYYY-MM-DD.md`:
+
+```markdown
+# Daily Brief — YYYY-MM-DD
+
+## Session Focus
+[Roi's confirmed task(s)]
+
+## Open Threads from Yesterday
+[list or "None"]
+
+## Open Deliverables
+[list or "None"]
+
+## Goals Alignment
+[one sentence: how today's focus maps to 90-day priorities]
+```
+
+Confirm: `Brief saved. Go build.`
+
+## Edge Cases
+
+- **No notes from yesterday** — Omit the section. Don't say "I couldn't find anything."
+- **Roi's answer is "none of those"** — Ask: "What's the one thing that moves the needle today?" Write that in.
+- **Called mid-session** — Still run it. Overwrite today's brief if it already exists.
+- **`data/` doesn't exist** — Create it before writing.
+- **Goals file looks stale (30+ days old)** — Flag: "my-goals.md hasn't been updated recently — brief is based on current content."
+- **Argument passed but no matching threads** — Say: "Nothing in your open threads matches '[arg]' — proposing from goals instead."

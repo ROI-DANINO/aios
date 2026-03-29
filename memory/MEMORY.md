@@ -6,4 +6,4 @@ Each entry below is a pointer to a memory file.
 
 ## Index
 
-<!-- Memory entries will be added here as the system learns about you -->
+- [User Profile — Roi Danino](user_profile.md) — Developer, Tel Aviv, building Captionate v3, AIOS is personal system not a product
