@@ -55,9 +55,9 @@ type: reference
 | Skill | Domain | Triggers | What it does |
 |-------|--------|----------|--------------|
 | `note` | utility | note this, remember this, capture this, jot down | Quick mid-session capture to notes.md |
-| `dev-audit` | dev | where am I, what's left, is this done, phase status, what should I work on | Audit current dev phase — progress, blockers, next steps |
+| `dev-audit` | dev | where am I, what's left, what phase am I in, phase status, what should I work on | Audit current dev phase — progress, blockers, next steps |
 | `systematic-debugging` | dev | bug, error, this is broken, something's wrong, failing, unexpected behavior | Diagnose bugs before proposing fixes |
-| `verification-before-completion` | dev | is this done, let me verify, check before I commit, make sure this works | Verify before claiming done — evidence first |
+| `verification-before-completion` | dev | is this done yet, let me verify, check before I commit, make sure this works, verify this works | Verify before claiming done — evidence first |
 | `writing-skills` | system | create a skill, new skill, update this skill, improve this skill | Create or improve skills — always update skills-map after |
 
 ---
