@@ -64,7 +64,10 @@ const { chromium } = require('playwright');
 })();
 ```
 
-Run: `bunx node .tmp/browse-task.js`
+Run:
+```bash
+cd .tmp && ~/.bun/bin/bun add playwright --silent 2>/dev/null; ~/.bun/bin/bun run browse-task.js
+```
 
 **HARD RULE: Never write a script that submits a form, clicks a purchase/delete/send button, or posts data without explicit per-action approval from Roi.**
 
