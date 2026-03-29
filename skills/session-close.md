@@ -81,7 +81,26 @@ Append to `data/notes.md` for each next task:
 [next task text] #next
 ```
 
-### Phase 5: Close out
+### Phase 5: Memory extraction
+
+Scan the session answers for anything that should persist across sessions. Extract only what's non-obvious and wouldn't be derivable from the code or git log.
+
+**Extract if present:**
+- A decision that was made and the reasoning behind it (→ `project` memory)
+- A pattern that worked or failed that you'd want to repeat or avoid (→ `feedback` memory)
+- A project milestone completed or a new blocker surfaced (→ `project` memory)
+- Something learned about how Roi likes to work (→ `user` memory)
+
+**Skip:**
+- Routine task completions ("fixed the bug") — these are in the session log
+- Anything already in MEMORY.md
+- Vague observations with no actionable consequence
+
+For each item worth saving: write it to `memory/[type]_[topic].md` using the standard frontmatter format (`name`, `description`, `type`), then add a pointer line to `memory/MEMORY.md`.
+
+If nothing worth extracting: skip silently. Don't note the absence.
+
+### Phase 6: Close out
 
 Confirm in two lines:
 

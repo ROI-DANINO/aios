@@ -8,7 +8,7 @@ AIOS is Roi's personal AI Operating System — a file-driven co-pilot system wit
 
 ## System Handbook
 
-`claude.md` is the primary operating handbook. Read it before any session that involves system-level changes. Key directives:
+`CLAUDE.md` is the primary operating handbook. Read it before any session that involves system-level changes. Key directives:
 
 - **Step-by-step only** — plan before doing, check in at each step
 - **No big changes without approval** — present the plan, get a yes, then execute
