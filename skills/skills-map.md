@@ -17,6 +17,7 @@ type: reference
 |-------|--------|----------|--------------|
 | `using-superpowers` | system | session start, new conversation, first message | Loads skill rules and routing behavior |
 | `daily-brief` | business | start of day, what should I work on, morning, orient me, what's on my plate | Reads goals, surfaces yesterday's notes, proposes focused agenda |
+| `init` | system | /init, set up this project, tidy this project, onboard this project, initialize, help me organize | Scans project dir, interviews user, proposes tidy structure, moves files with approval, registers in AIOS memory |
 
 ---
 
@@ -117,3 +118,4 @@ type: reference
 ---
 
 <!-- NEW SKILLS APPENDED BELOW BY update-skills-map.sh — REVIEW PLACEMENT -->
+| `init` | utility | <!-- TODO: add triggers --> | Project onboarding wizard — scan an existing project directory, interview the user about | <!-- TODO: review placement -->
