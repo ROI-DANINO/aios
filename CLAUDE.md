@@ -60,3 +60,26 @@ Memory lives in `memory/`. `MEMORY.md` is the index — always loaded. Individua
 ## Context Files
 
 `context/` holds Roi's business identity. Read relevant files when doing business-adjacent work (offers, GTM, communications). These are ground truth for voice, goals, and positioning — do not contradict them without explicit instruction.
+
+## Runtime Tools
+
+AIOS has Bun and Playwright (Chromium) installed system-wide. Skills that use the browser or parallel sessions call these directly — no setup needed per session.
+
+- **Bun:** `~/.bun/bin/bun` — JS runtime for Playwright scripts
+- **Playwright/Chromium:** `~/.cache/ms-playwright/` — real browser for `/browse`
+- **Claude Code CLI headless mode:** used by `/conductor` to spawn parallel sessions
+
+## gstack Skills Index
+
+Additional skills grafted from gstack (available as slash commands):
+
+**Dev lifecycle (run after `finishing-a-development-branch`):**
+- `/qa` — QA pass: runs tests, flags untested paths and edge cases
+- `/cso` — Security review: OWASP scan, secrets check, permission audit
+- `/ship` — Release: version bump, changelog, git tag, push
+- `/retro` — Sprint retrospective: what shipped, what didn't, next focus
+
+**Anytime:**
+- `/office-hours` — Unstructured problem-solving, no fixed format
+- `/browse [URL] [task]` — Real Chromium browser automation via Playwright
+- `/conductor` — Spawn parallel Claude Code sessions for independent tasks
