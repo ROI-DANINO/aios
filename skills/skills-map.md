@@ -54,6 +54,15 @@ type: reference
 
 ---
 
+## Phase 3b — Dev Pod (Multi-Agent)
+
+| Skill | Domain | Triggers | What it does |
+|-------|--------|----------|--------------|
+| `pod` | dev | pod, spin up a dev team, multi-agent, dispatch this feature, run the dev pod | Entry point — Planner decomposes task, Gate 1 approval, Conductor dispatches agents |
+| `pod-review` | dev | review pod results, approve this, pod diff, merge pod work | Gate 2 — diff review, approve or reject, Reviewer agent opens PR |
+
+---
+
 ## Phase 4 — Anytime / Utility
 
 | Skill | Domain | Triggers | What it does |
