@@ -118,4 +118,3 @@ type: reference
 ---
 
 <!-- NEW SKILLS APPENDED BELOW BY update-skills-map.sh — REVIEW PLACEMENT -->
-| `init` | utility | <!-- TODO: add triggers --> | Project onboarding wizard — scan an existing project directory, interview the user about | <!-- TODO: review placement -->
