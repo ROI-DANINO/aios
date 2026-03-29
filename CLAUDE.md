@@ -69,17 +69,52 @@ AIOS has Bun and Playwright (Chromium) installed system-wide. Skills that use th
 - **Playwright/Chromium:** `~/.cache/ms-playwright/` — real browser for `/browse`
 - **Claude Code CLI headless mode:** used by `/conductor` to spawn parallel sessions
 
+## Agent Teams
+
+Claude Code Agent Teams is enabled (`CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`). The Dev Pod (`/pod`) now uses the Scheduler agent to coordinate Coder/Tester/Reviewer teammates with dependency-aware dispatch. The main session receives push updates — no polling, no silent waiting.
+
+Enable a teammate manually: open a new Claude Code session alongside your main session.
+
 ## gstack Skills Index
 
 Additional skills grafted from gstack (available as slash commands):
 
+**Planning reviews (run before brainstorming):**
+- `/plan-ceo-review` — CEO/founder mode: rethink the problem, find the 10-star product
+- `/plan-eng-review` — Engineering architecture review and lock-down
+- `/plan-design-review` — Design system review before implementation
+- `/autoplan` — Chains CEO → Design → Eng reviews with confirmation prompts
+
+**Design work:**
+- `/design-consultation` — Competitor research, design proposals, realistic mockups
+- `/design-review` — Design system audit and iteration feedback
+- `/design-shotgun` — Collaborative design brainstorming with variations
+
 **Dev lifecycle (run after `finishing-a-development-branch`):**
+- `/review` — Intelligent multi-mode review: tracks what's been reviewed, does the right thing
+- `/investigate` — Auto-freezes to module, safety restrictions on
 - `/qa` — QA pass: runs tests, flags untested paths and edge cases
+- `/qa-only` — QA check without automatic fixes
 - `/cso` — Security review: OWASP scan, secrets check, permission audit
 - `/ship` — Release: version bump, changelog, git tag, push
+- `/setup-deploy` — Detects platform, production URL, deploy commands — one-time setup
+- `/land-and-deploy` — Merge PR + monitor production after code review passes
+- `/canary` — Monitor production for 30 minutes post-deploy
+- `/document-release` — Generate release documentation
 - `/retro` — Sprint retrospective: what shipped, what didn't, next focus
 
-**Anytime:**
+**Safety:**
+- `/careful` — Warns before rm -rf, DROP TABLE, force-push, git reset --hard
+- `/freeze [dir]` — Lock edits to a single directory
+- `/guard` — Combines careful + freeze (maximum safety)
+- `/unfreeze` — Release directory lock
+
+**Browser and utilities:**
 - `/office-hours` — Unstructured problem-solving, no fixed format
 - `/browse [URL] [task]` — Real Chromium browser automation via Playwright
 - `/conductor` — Spawn parallel Claude Code sessions for independent tasks
+- `/setup-browser-cookies` — Import cookies from Chrome/Arc/Brave/Edge for authenticated pages
+- `/connect-chrome` — Browser integration setup (Chrome sidebar)
+- `/codex` — Three OpenAI Codex review modes: code review, adversarial, open consultation
+- `/benchmark` — Performance benchmarking and analysis
+- `/gstack-upgrade` — Update gstack to latest version
