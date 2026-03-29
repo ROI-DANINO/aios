@@ -80,3 +80,13 @@ Based on question 3, suggest exactly one change. Be specific. Not "communicate b
 - **No commits in range** — Report honestly: "No commits in this range. Was this a planning/thinking sprint?"
 - **my-goals.md missing** — Skip goals alignment section.
 - **Argument is a sprint name** — Try to match to session log filenames or notes containing the sprint name.
+
+## Next Step
+
+After the retrospective: update `context/my-goals.md` if priorities shifted, then start the next sprint with `/daily-brief`.
+
+## See Also
+
+- `/dev-audit` — feeds into retro via session logs and git history
+- `/daily-brief` — next session start, picks up the sprint focus from retro output
+- `/ship` (gstack) — the step before retro in the dev pipeline

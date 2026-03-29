@@ -6,7 +6,7 @@ description: >
   done", "audit my project", "what's left", "phase status", "what should I work on".
   Reads PLAN.md, runs tests, checks git log — produces a structured status report.
 user-invocable: true
-argument-hint: "[path/to/project] — defaults to Captionate v3"
+argument-hint: "[path/to/project] — defaults to current working directory"
 ---
 
 # Dev Audit
@@ -27,7 +27,7 @@ No questions. Read the project. Tell the truth.
 ### Phase 1: Locate Project
 
 - If argument provided → use it as project root
-- Default → `/home/roking/Desktop/Projects/captionate/captionate-v3`
+- Default → current working directory
 - Read `PLAN.md`, `INIT.md`, `CLAUDE.md` silently — no output yet
 
 ### Phase 2: Gather Hard Data
@@ -83,7 +83,7 @@ If `memory/pod-manifest.md` does not exist, skip this section entirely.
 Output exactly this structure:
 
 ```
-## Phase Audit — Captionate V3
+## Phase Audit — {project name}
 **Date:** {today}
 **Current Phase:** {from PLAN.md}
 **Last Updated:** {from PLAN.md}
@@ -116,6 +116,7 @@ After the report, give one routing instruction:
 | Situation | Route |
 |-----------|-------|
 | Phase complete, no blockers | "Phase done. Run `/pod-mapper` to map your next workflow, or `/dev-audit {next_project}` to audit another project." |
+| Phase complete, no `ux-decisions.md` found | "No UX decisions recorded for this project. Run `/ux-scan` to find features that may be missing intent before moving forward." |
 | Data collection in progress | "You need {N} more rated runs. Open the dashboard at `localhost:5173` and run 10 images today." |
 | Tests failing | "Run `/systematic-debugging` — start with the failing module: {module name}." |
 | Open questions blocking code | "Answer these before writing more code: {list}. Use `/superpowers:brainstorming` if stuck." |
@@ -128,3 +129,17 @@ After the report, give one routing instruction:
 - **PLAN.md has no checkboxes** — Summarise what's described as complete vs in-progress in prose.
 - **Multiple phases in PLAN.md** — Report only on the current active phase (the one marked as in-progress). Mention other phases exist but don't expand them.
 - **Project argument is wrong path** — Report the error clearly: "No PLAN.md at {path}. Did you mean {closest match}?"
+
+## Next Step
+
+When audit is complete and phase is healthy: run `/qa` (gstack) to check coverage and flag untested paths, then `/cso` for security review, then `/ship` to release.
+
+If UX intent is missing: run `/ux-scan` before continuing.
+
+## See Also
+
+- `/qa` (gstack) — test coverage check, runs after audit
+- `/cso` (gstack) — security review
+- `/ship` (gstack) — release
+- `/ux-scan` — UX audit, feeds back into dev-audit
+- `/retro` — end-of-sprint retrospective
