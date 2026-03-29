@@ -1,3 +1,10 @@
+---
+name: system-architect
+description: Architecture design walkthrough for AIOS — walks through each section interactively and produces a complete architecture brief
+user-invocable: true
+argument-hint: "[optional: focus area]"
+---
+
 # AIOS Architecture Brief Template
 
 > Paste this into Claude alongside your AI operating system. It will walk through each section, ask you questions about your specific setup, and produce a complete architecture brief for your system.
