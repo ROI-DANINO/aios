@@ -9,6 +9,8 @@ user-invocable: true
 argument-hint: "[sprint name or date range, e.g. 'week of Mar 24'] — defaults to last 7 days"
 ---
 
+> **Note:** This is the AIOS-native retro. It reads `data/session-log-*.md` for full session context. The gstack `/retro` does not have access to AIOS session logs — use this version for AIOS project retrospectives.
+
 # Retro
 
 Look back. Be honest. Move forward smarter.

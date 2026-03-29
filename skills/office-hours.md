@@ -54,3 +54,14 @@ Once you know the problem:
 - If the problem needs a skill (e.g. it's a bug → `/systematic-debugging`), say so — but only after you've understood the problem fully
 - One question at a time
 - No unsolicited advice — follow Roi's thread, don't redirect it
+
+## Open-Ended Mode
+
+If the problem doesn't fit a specific skill, stay open. Reason through alternatives out loud, surface assumptions, and end with: "What feels like the right next step from here?" No fixed output format.
+
+> **Note:** The gstack `/office-hours` runs YC-style forcing questions. This AIOS version prioritizes understanding the problem before any framework. If you want the forcing-question format, say "office hours YC mode."
+
+## See Also
+
+- `superpowers:systematic-debugging` — for bugs with a clear reproduction path
+- `superpowers:brainstorming` — for feature ideation with a structured design output
