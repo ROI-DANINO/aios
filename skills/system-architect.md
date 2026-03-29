@@ -205,3 +205,13 @@ NEXT ACTIONS:
 3. Tell Claude: "Walk me through this section by section for my AIOS. Ask me the questions and build my architecture brief."
 4. Claude will ask you about your specific setup, fill in each table, and produce the completed brief
 5. Save the output as your architecture document — reference it when building, troubleshooting, or onboarding clients
+
+## Next Step
+
+After architecture is documented: enter the appropriate workflow chain — `/business-setup` for a new AIOS context, or `/dev-audit` to audit an existing project phase.
+
+## See Also
+
+- `/init` — project onboarding, typically runs before system-architect
+- `/business-setup` — AIOS context setup
+- `/dev-audit` — active project phase audit

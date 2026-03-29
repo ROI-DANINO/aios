@@ -188,3 +188,12 @@ After registering, tell the user exactly what to do next based on their Phase 2 
 - **User says "don't move anything"** — Honour it. Just create AIOS scaffolding and register.
 - **Can't determine tech stack** — Ask: "What language/framework is this in?" Don't guess.
 - **Project path has spaces** — Always quote paths in bash commands.
+
+## Next Step
+
+After project is registered: run `/system-architect` to design the architecture, or go straight to `/business-setup` if this is a new AIOS context.
+
+## See Also
+
+- `/system-architect` — architecture design, natural follow-on after init
+- `/business-setup` — AIOS context setup, alternative next step for new installs
