@@ -90,17 +90,53 @@ The navigator reads `skills/skills-map.md` and applies four matching rules in or
 
 ---
 
+## Auto-Update Mechanism
+
+The skills map stays current via two complementary mechanisms:
+
+### 1. Claude Code Hook (file-watcher)
+
+A `PostToolUse` hook in `.claude/settings.json` watches for Write/Edit operations on files matching `skills/*.md`. When triggered, it runs a script (`scripts/update-skills-map.sh`) that:
+
+1. Scans all files in `skills/` for frontmatter (`name`, `description`)
+2. Detects any skill not already present in `skills-map.md`
+3. Appends new skills to the appropriate phase section with a `# TODO: review placement` tag
+4. Does not modify existing entries — only adds missing ones
+
+The hook is non-blocking and runs in the background. It flags new skills for Roi to review placement rather than silently placing them in the wrong phase.
+
+### 2. writing-skills Step
+
+The `writing-skills` skill (both AIOS and Superpowers versions) includes a mandatory final step: update `skills/skills-map.md` with the new or modified skill's phase, domain, triggers, and description. This ensures intentional, accurate placement at creation time.
+
+---
+
 ## Files to Create
 
 | File | Purpose |
 |------|---------|
 | `skills/skills-map.md` | Layered reference — phase + domain + triggers |
 | `skills/skill-navigator.md` | Navigator skill for contextual silent routing |
+| `scripts/update-skills-map.sh` | Hook script — detects new skills, appends with review tag |
+
+### Settings Change
+
+Add to `.claude/settings.json`:
+```json
+{
+  "hooks": {
+    "PostToolUse": [{
+      "matcher": "Write|Edit",
+      "hooks": [{"type": "command", "command": "bash scripts/update-skills-map.sh"}]
+    }]
+  }
+}
+```
 
 ---
 
 ## Out of Scope
 
-- No changes to existing skill files
+- No changes to existing skill files (except `writing-skills` gets one new step)
 - No subfolder reorganization of `skills/`
-- No UI or external tooling — pure markdown
+- No UI or external tooling — pure markdown + one shell script
