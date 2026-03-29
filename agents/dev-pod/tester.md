@@ -54,3 +54,20 @@ grep -r "def test_\|it(\|test(" {worktree_path} --include="*.py" --include="*.ts
 - Do not modify any code. Read and run only.
 - If Docker is required and not running, note it and use grep fallback for test count.
 - If tests cannot run at all, write status: unknown and explain why.
+
+## Completion Signal
+
+When testing is complete, write your result to `.tmp/conductor-result-tester-{N}.md`.
+
+Then send a message to the Scheduler agent:
+```
+Task complete: {sub-task name} tests
+Status: {passing | failing | unknown}
+Result file: .tmp/conductor-result-tester-{N}.md
+```
+
+If tests cannot run (missing runner, Docker needed, etc.), message Scheduler:
+```
+DECISION NEEDED: Cannot run tests — {reason}
+Sub-task: {sub-task name}
+```

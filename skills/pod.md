@@ -86,66 +86,44 @@ Approve this split? (yes / revise / cancel)
 - **revise** → ask what to change, update `memory/pod-manifest.md`, re-present
 - **cancel** → delete `memory/pod-manifest.md`, report "Pod cancelled."
 
-## Phase 4: Dispatch via Conductor
+## Phase 4: Dispatch via Scheduler
 
 Update manifest status to `in-progress`.
 
-For each sub-task in the manifest, write a conductor task prompt to `.tmp/conductor-task-{N}.md`:
+Spawn the Scheduler agent as a Claude Code Agent Team lead session:
 
-```markdown
-# Task {N}: {sub-task name}
+```bash
+claude --dangerously-skip-permissions -p "$(cat <<'PROMPT'
+You are the Scheduler agent in the AIOS Dev Pod. Read your role definition at agents/dev-pod/scheduler.md and follow it exactly.
 
-## Context
-You are the {agent role} in the AIOS Dev Pod.
-Read your role definition at agents/dev-pod/{role}.md and follow it exactly.
-Read the pod manifest at memory/pod-manifest.md — your assigned sub-task is: {sub-task name}
-
+Manifest: memory/pod-manifest.md
 Project root: /home/roking/Desktop/Projects/aios
-
-## Goal
-Complete your assigned sub-task as defined in the manifest.
-Write your result to .tmp/conductor-result-{N}.md when done.
-
-## Worktree
-First, create and switch to your worktree:
-```bash
-git worktree add ../{worktree-name} -b {worktree-branch}
-cd ../{worktree-name}
+PROMPT
+)" > .tmp/pod-scheduler-log.txt 2>&1 &
 ```
 
-## Instructions
-- Work only within the files listed in your sub-task scope
-- Follow your role definition exactly
-- Write .tmp/conductor-result-{N}.md before exiting
-```
+The Scheduler will:
+- Read the manifest dependency DAG
+- Spawn Coder and Tester agents as Claude Code teammates with correct blockedBy relationships
+- Surface decisions to this session as they arise
+- Message you when all agents complete
 
-Then invoke `/conductor` with these pre-written task files (do not re-ask the user for tasks — pass the files directly by reading them as the task list).
+Report: "Scheduler running. Agents will be dispatched with dependency ordering. You'll receive updates as work progresses."
 
-Spawn each session:
-```bash
-claude --dangerously-skip-permissions -p "$(cat .tmp/conductor-task-{N}.md)" > .tmp/conductor-log-{N}.txt 2>&1 &
-```
+## Phase 5: Receive Updates
 
-Report: "Dispatched {N} agents. Monitoring completion..."
+Unlike the old polling model, you do NOT need to wait silently. The Scheduler pushes updates to you:
 
-## Phase 5: Monitor and Handoff
+- **Progress messages**: Scheduler messages you when each sub-task completes
+- **Decision requests**: Agents surface questions directly to you via Scheduler
+- **Completion**: When all agents finish, Scheduler messages: "All agents complete. Run /pod-review."
 
-Poll every 30 seconds for all result files:
-```bash
-ls .tmp/conductor-result-*.md 2>/dev/null | wc -l
-```
+**While agents run, you can:**
+- Continue working on other tasks
+- Answer any decision requests that come in
+- Check `.tmp/pod-scheduler-log.txt` if you want raw progress
 
-When all results exist, update manifest status to `pending-gate-2`.
-
-Report:
-```
-## Dev Pod — Agents Complete
-
-All {N} agents finished. Results:
-{for each result file: show status line and summary}
-
-Run `/pod-review` to review the diff and approve or reject the merge.
-```
+When you receive "All agents complete", run `/pod-review` to proceed to Gate 2.
 
 ## Edge Cases
 

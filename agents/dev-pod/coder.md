@@ -44,3 +44,22 @@ You will receive:
 - Never merge or push. Your job ends at the commit.
 - If you hit a blocker (missing dependency, ambiguous requirement), write status: failed and explain clearly in the result file.
 - Commit message format: `feat: {sub-task name in lowercase}`
+
+## Completion Signal
+
+When your task is complete (pass or fail), write your result to `.tmp/conductor-result-{N}.md` using the format in your Process section.
+
+Then send a message to the Scheduler agent:
+```
+Task complete: {sub-task name}
+Status: {complete | failed}
+Result file: .tmp/conductor-result-{N}.md
+```
+
+If you hit a blocker or need a decision, message the Scheduler immediately:
+```
+DECISION NEEDED: {question}
+Context: {relevant context}
+Sub-task: {sub-task name}
+```
+Do not block your own process — write partial results and wait.
