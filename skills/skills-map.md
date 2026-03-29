@@ -39,6 +39,8 @@ type: reference
 | `design-consultation` | dev | design this, competitor research, design system, mockups, DESIGN.md | Competitor research, design proposals, realistic mockups |
 | `design-review` | dev | review the design, design audit, design feedback | Design system audit and iteration feedback |
 | `design-shotgun` | dev | brainstorm designs, design variations, explore design directions | Collaborative design brainstorming with variations |
+| `ux-gate` | dev | ux gate, before we build, who uses this, what's the purpose, ux audit, loose ends, ux check | Blocks feature implementation until purpose/who/how are answered; audits repo for loose ends |
+| `ux-scan` | dev | ux scan, find ux issues, scan for ux problems, what features are unclear, ux problems, audit ux | Deep codebase scan — reads actual code to find features with no clear purpose, user, or outcome |
 
 ---
 

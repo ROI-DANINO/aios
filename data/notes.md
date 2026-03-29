@@ -1,3 +1,15 @@
 
+### [2026-03-30] — AIOS (session 2)
+Build skills/skill-scan.md per plan at .claude/plans/lovely-cooking-whistle.md #next
+
+### [2026-03-30] — AIOS
+Execute docs/superpowers/plans/2026-03-30-skill-inventory-redesign.md using superpowers:subagent-driven-development #next
+
 ### [2026-03-29] — AIOS
 Investigate Paperclip as the UI layer before building custom dashboard. Already referenced in claude.md as "Next phase: Paperclip web UI". Research what it is and whether it fits the agent management needs. #next
+
+### [2026-03-29] — AIOS
+UX gap resolution: skill-navigator body is nearly empty — document routing logic and edge cases, or decide it's intentionally minimal. #next
+
+### [2026-03-29] — Captionate v3
+Idea parking lot — Paperclip integration: (1) automated research/data collection agent org for Captionate v3, (2) 50-persona simulation for testing chat/connection interface, (3) already have multi-agent coding via /pod + Agent Teams. Revisit when Captionate v3 reaches data/testing phase. #idea
