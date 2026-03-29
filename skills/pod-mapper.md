@@ -166,3 +166,12 @@ Route to next action:
 - **Wants to map everything at once** — Stop them. "Pick the one that hurts most. We'll get that running first."
 - **Workflow too simple (3 steps)** — That's fine. Map it, automate what you can, move on.
 - **Workflow too complex (20+ steps)** — Break into sub-pods. "Your sales workflow has three phases: prospecting, outreach, and closing. Let's map prospecting first."
+
+## Next Step
+
+After pod map is written: execute with `/pod "task"` to dispatch a multi-agent dev team, or continue mapping another business function.
+
+## See Also
+
+- `/business-setup` — AIOS context, runs before pod-mapper
+- `/pod` — multi-agent execution of the workflows mapped here

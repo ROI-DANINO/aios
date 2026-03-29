@@ -133,3 +133,13 @@ When you receive "All agents complete", run `/pod-review` to proceed to Gate 2.
 - **manifest.md already exists with status in-progress** — Block with: "A pod run is already in progress. Check `.tmp/conductor-log-*.txt` or run `/pod-review`."
 
 ---
+
+## Next Step
+
+When all agents report complete: run `/pod-review` to review diffs at Gate 2, approve, and open the PR.
+
+## See Also
+
+- `/pod-review` — Gate 2 review and PR creation
+- `/pod-mapper` — maps the workflows that feed into pod tasks
+- `superpowers:dispatching-parallel-agents` — Agent SDK alternative for parallel work (no headless sessions)

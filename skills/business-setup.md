@@ -226,3 +226,12 @@ Based on their answers, tell them exactly where to start:
 - **Reconfiguring** — Back up existing context files to `.tmp/` before overwriting.
 - **Multiple offers** — Pick the primary one. Note the others. They can run offer-engine separately for each.
 - **Doesn't know what tools to use** — Recommend Apollo (free tier) + HeyReach (LinkedIn) or Instantly (email). One lead gen + one outreach tool is enough to start.
+
+## Next Step
+
+After context is configured: run `/pod-mapper` to map your business workflows into automatable pods.
+
+## See Also
+
+- `/pod-mapper` — workflow audit, natural follow-on after business setup
+- `/init` — project onboarding, pairs with business-setup for new AIOS installs

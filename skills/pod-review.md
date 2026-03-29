@@ -142,3 +142,12 @@ Report: "Pod run abandoned. No changes to main branch."
 - **Reviewer times out** — "Reviewer agent timed out. Check `.tmp/pod-reviewer-log.txt`. PR was not opened — open it manually or re-run `/pod-review`."
 - **Tester shows failures but user approves anyway** — Proceed but add a warning line to the PR body: "⚠️ Approved with failing tests: {list}"
 - **Multiple worktrees, partial approval** — Ask: "Approve all worktrees or specific ones? (all / list names)"
+
+## Next Step
+
+After PR is opened: run `superpowers:finishing-a-development-branch` to merge and close the branch.
+
+## See Also
+
+- `/pod` — Gate 1 entry point that dispatched the agents reviewed here
+- `superpowers:finishing-a-development-branch` — branch merge and cleanup
