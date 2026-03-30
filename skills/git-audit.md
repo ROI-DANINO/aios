@@ -91,3 +91,73 @@ gh_api() {
 ```
 
 ---
+
+## Phase 1 — Repo Setup
+
+Run these checks first. Fast — all via one GitHub API call.
+
+```bash
+gh_api "/repos/$GITHUB_USER/$REPO" > /tmp/gh_repo_$$.json
+
+DESCRIPTION=$(python3 -c "import json; d=json.load(open('/tmp/gh_repo_$$.json')); print(d.get('description') or '')")
+TOPICS=$(python3 -c "import json; d=json.load(open('/tmp/gh_repo_$$.json')); print(len(d.get('topics', [])))")
+DEFAULT_BRANCH=$(python3 -c "import json; d=json.load(open('/tmp/gh_repo_$$.json')); print(d['default_branch'])")
+VISIBILITY=$(python3 -c "import json; d=json.load(open('/tmp/gh_repo_$$.json')); print('private' if d['private'] else 'public')")
+rm -f "/tmp/gh_repo_$$.json"
+
+HAS_README=$(gh_api "/repos/$GITHUB_USER/$REPO/readme" > /dev/null 2>&1 && echo "yes" || echo "no")
+
+# Branch protection
+PROT_FILE="/tmp/gh_prot_$$.json"
+gh_api "/repos/$GITHUB_USER/$REPO/branches/$DEFAULT_BRANCH/protection" > "$PROT_FILE" 2>/dev/null
+PROTECTED=$(python3 -c "
+import json, sys
+try:
+  d = json.load(open('$PROT_FILE'))
+  print('yes' if 'required_status_checks' in d or 'required_pull_request_reviews' in d else 'no')
+except: print('no')
+")
+rm -f "$PROT_FILE"
+```
+
+Present findings:
+
+```
+⚙️  Repo Setup — owner/repo
+
+  Description       [✅ set / ⚠️ missing]
+  Topics            [✅ N topics / ⚠️ none set]
+  README            [✅ found / ⚠️ missing]
+  Default branch    [✅ main / ⚠️ <name> (not main)]
+  Branch protection [✅ enabled / ⚠️ not set]
+  Visibility        [public / private]
+```
+
+**Available fixes (confirm each individually before running):**
+
+Add description:
+```bash
+curl -s -X PATCH \
+  -H "Authorization: Bearer $GITHUB_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d "{\"description\":\"<user-provided description>\"}" \
+  "https://api.github.com/repos/$GITHUB_USER/$REPO"
+```
+
+Enable basic branch protection (require PR reviews, no force-push):
+```bash
+curl -s -X PUT \
+  -H "Authorization: Bearer $GITHUB_TOKEN" \
+  -H "Accept: application/vnd.github+json" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "required_status_checks": null,
+    "enforce_admins": false,
+    "required_pull_request_reviews": {"required_approving_review_count": 1},
+    "restrictions": null
+  }' \
+  "https://api.github.com/repos/$GITHUB_USER/$REPO/branches/$DEFAULT_BRANCH/protection"
+```
+
+End with triage prompt:
+> "Here's what I found — want me to fix anything, skip, or move to stale branches?"
