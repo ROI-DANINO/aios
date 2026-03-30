@@ -130,4 +130,5 @@ Additional skills grafted from gstack (available as slash commands):
 - `/codex` — Three OpenAI Codex review modes: code review, adversarial, open consultation
 - `/benchmark` — Performance benchmarking and analysis
 - `/gstack-upgrade` — Update gstack to latest version
+- `/git-audit [owner/repo]` — Interactive git + GitHub audit: repo setup, stale branches, commit quality, PR/issue/CI triage. Use `/git-audit report` to save a structured health report to `data/`.
 - `/skill-scan [skill-name]` — Full skill audit: finds missing registrations, chain gaps, duplicates. Saves tiered report to `data/` + feeds backlog. Optional interactive triage per finding.
