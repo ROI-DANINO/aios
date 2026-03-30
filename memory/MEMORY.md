@@ -16,3 +16,4 @@ Each entry below is a pointer to a memory file.
 - [Hermes Integration Project](project_hermes-integration.md) — Multi-phase AIOS × Hermes integration; plan at deliverables/hermes-integration-plan.md; Phase 0 next
 - [Subagents must end with session-close](feedback_subagent_session_close.md) — Always include /session-close in implementer subagent prompts so work gets logged
 - [Pi Agent Integration Decision](project_pi-integration.md) — oh-my-pi as primary engine, Claude Code plugs in via AIOS skills, Hermes stays as option; Approach B locked
+- [Agent Taxonomy Project](project_agent-taxonomy.md) — BMAD role-first + AIOS state layer + oh-my-pi runtime; research done, skills audited, ready to build
