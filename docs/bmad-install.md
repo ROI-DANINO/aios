@@ -13,8 +13,8 @@ Files were copied from `bmad-v6/skills/` in the cloned repo. The repo structure 
 | Dir | Contents |
 |-----|----------|
 | `~/.claude/skills/core/` | `bmad-master/` — master orchestrator skill |
-| `~/.claude/skills/bmb/` | Role agents: analyst, architect, developer, pm, scrum-master, ux-designer |
-| `~/.claude/skills/bmm/` | `builder/` — project builder skill |
+| `~/.claude/skills/bmb/` | `builder/` — project builder skill |
+| `~/.claude/skills/bmm/` | Role agents: analyst, architect, developer, pm, scrum-master, ux-designer |
 | `~/.claude/skills/cis/` | `creative-intelligence/` |
 
 ### Pre-existing gstack skills also present in source (not overwritten if identical)
