@@ -97,27 +97,20 @@ gh_api() {
 Run these checks first. Fast — all via one GitHub API call.
 
 ```bash
-gh_api "/repos/$GITHUB_USER/$REPO" > /tmp/gh_repo_$$.json
+REPO_JSON=$(gh_api "/repos/$GITHUB_USER/$REPO")
+DESCRIPTION=$(echo "$REPO_JSON" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d.get('description') or '')")
+TOPICS=$(echo "$REPO_JSON" | python3 -c "import json,sys; d=json.load(sys.stdin); print(len(d.get('topics', [])))")
+DEFAULT_BRANCH=$(echo "$REPO_JSON" | python3 -c "import json,sys; d=json.load(sys.stdin); print(d['default_branch'])")
+VISIBILITY=$(echo "$REPO_JSON" | python3 -c "import json,sys; d=json.load(sys.stdin); print('private' if d['private'] else 'public')")
 
-DESCRIPTION=$(python3 -c "import json; d=json.load(open('/tmp/gh_repo_$$.json')); print(d.get('description') or '')")
-TOPICS=$(python3 -c "import json; d=json.load(open('/tmp/gh_repo_$$.json')); print(len(d.get('topics', [])))")
-DEFAULT_BRANCH=$(python3 -c "import json; d=json.load(open('/tmp/gh_repo_$$.json')); print(d['default_branch'])")
-VISIBILITY=$(python3 -c "import json; d=json.load(open('/tmp/gh_repo_$$.json')); print('private' if d['private'] else 'public')")
-rm -f "/tmp/gh_repo_$$.json"
+gh_api "/repos/$GITHUB_USER/$REPO/readme" > /dev/null 2>&1 && HAS_README="yes" || HAS_README="no"
 
-HAS_README=$(gh_api "/repos/$GITHUB_USER/$REPO/readme" > /dev/null 2>&1 && echo "yes" || echo "no")
-
-# Branch protection
-PROT_FILE="/tmp/gh_prot_$$.json"
-gh_api "/repos/$GITHUB_USER/$REPO/branches/$DEFAULT_BRANCH/protection" > "$PROT_FILE" 2>/dev/null
-PROTECTED=$(python3 -c "
+PROT_JSON=$(gh_api "/repos/$GITHUB_USER/$REPO/branches/$DEFAULT_BRANCH/protection" 2>/dev/null || echo "{}")
+PROTECTED=$(echo "$PROT_JSON" | python3 -c "
 import json, sys
-try:
-  d = json.load(open('$PROT_FILE'))
-  print('yes' if 'required_status_checks' in d or 'required_pull_request_reviews' in d else 'no')
-except: print('no')
+d = json.load(sys.stdin)
+print('yes' if 'required_status_checks' in d or 'required_pull_request_reviews' in d else 'no')
 ")
-rm -f "$PROT_FILE"
 ```
 
 Present findings:
