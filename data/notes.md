@@ -1,4 +1,7 @@
 
+### [2026-03-30] — AIOS (session 5)
+Restart Claude Code, verify /skill-scan works via Skill tool, then run full /skill-scan audit #next
+
 ### [2026-03-30] — AIOS (session 2)
 Build skills/skill-scan.md per plan at .claude/plans/lovely-cooking-whistle.md #next
 

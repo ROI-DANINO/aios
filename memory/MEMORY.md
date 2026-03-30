@@ -11,3 +11,4 @@ Each entry below is a pointer to a memory file.
 - [Captionate v3 — Active Project](project_captionate.md) — Primary dev project, top 90-day priority, use /dev-audit for phase status
 - [session-close behavior](feedback_session_close.md) — No questions at close; derive from context, accept optional note argument
 - [Skill override vulnerability](project_skill-override-vulnerability.md) — Local skills can be shadowed by Superpowers versions; hardening is in-progress
+- [AIOS Plugin Infrastructure](project_aios-plugin-infrastructure.md) — skills/ files aren't slash commands; must be installed via ~/.claude/aios-plugins/ marketplace

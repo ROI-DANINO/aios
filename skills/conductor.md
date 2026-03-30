@@ -105,3 +105,9 @@ When all result files exist, report:
 - **One session fails** — Report partial results. Don't suppress failures: "Task 2 failed. Log at `.tmp/conductor-log-2.txt`."
 - **More than 5 tasks** — Warn: "Running {N} parallel sessions is resource-intensive. Consider batching. Proceed?"
 - **claude CLI not found** — "Claude Code CLI not found. Install it at claude.ai/code."
+
+## See Also
+
+- `pod` — calls conductor as part of the multi-agent chain (Dev Pod entry point)
+- `superpowers:dispatching-parallel-agents` — alternative when tasks have dependencies; prefer this over conductor when tasks are not fully independent
+- `pod-review` — Gate 2 after conductor finishes in the pod chain

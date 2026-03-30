@@ -4,6 +4,7 @@ description: >
   Contextual silent skill router. Reads skills-map.md and invokes the right skill
   based on what the user is doing — no announcement, no confirmation. Fires automatically
   at session start and after every user message.
+user-invocable: false
 ---
 
 # Skill Navigator
