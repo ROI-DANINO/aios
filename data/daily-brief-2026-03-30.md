@@ -1,33 +1,27 @@
 # Daily Brief — 2026-03-30
 
-## Session 10 — Skill Inventory Redesign
+## Session Focus
+Write tri-agent system spec (oh-my-pi + Claude Code + Hermes) on branch `feature/pi-agent-integration`.
 
-### Session Focus
-Execute `docs/superpowers/plans/2026-03-30-skill-inventory-redesign.md`
+## Open Threads
+- Write tri-agent spec: oh-my-pi as primary engine, Claude Code plugs in via AIOS skills, Hermes as option — branch `feature/pi-agent-integration` #next
+- Hermes Phase 0: clone + install hermes-agent (still pending) #next
+- Add `user-invocable: true` to `skills/skills-map.md` frontmatter (Immediate health task) #next
+- Add `last-updated` to all 5 `context/` files #next
 
-### Result
-All 8 tasks verified complete — most were already done in prior sessions. Only net-new artifact: `data/skill-improvement-backlog.md` (already on master). All skill chains wired, duplicates removed, retro/office-hours hardened, workflow chains in skills-map.
+## Open Deliverables
+- `deliverables/hermes-integration-plan.md`
 
----
+## Goals Alignment
+Tri-agent system spec is the architectural foundation for AIOS as a real product + dev management layer — priority #3 for the next 90 days.
 
+## AIOS Health Tasks
 
-## Session 9 — Hermes Integration Phase 0
+Immediate:
+- [ ] Add `user-invocable: true` to frontmatter of `skills/skills-map.md` — _skill-health_
 
-### Context
-Last session completed the planning phase for AIOS × Hermes integration.
-Project dir scaffolded at `~/Desktop/Projects/hermes-integration/`.
+This week:
+- [ ] Add `last-updated` field to all 5 `context/` files — _memory-context_
+- [ ] Convert 3 stale #ideas into scoped backlog items (skill-creator, parallel-agents, Paperclip) — _self-improvement_
 
-### First Task
-Answer the 4 open questions in `~/Desktop/Projects/hermes-integration/status.md` — these gate Phase 1 design.
-
-Then start **Phase 0**: clone `NousResearch/hermes-agent`, install, run `hermes chat`, audit what works.
-
-### Open Questions (answer these first)
-1. Primary interface: Hermes CLI as main terminal, or Claude Code stays primary?
-2. Model config: Claude exclusively in Hermes, or multi-provider routing?
-3. Persistence: Hermes as always-on daemon or per-task invocations?
-4. Mobile access: Telegram/Discord — integrate early or skip for now?
-
-### Skills Backlog (don't do yet — separate session)
-`daily-brief`, `session-close`, `dev-audit`, `pod-mapper`, `business-setup` all need updating
-to use `~/Desktop/Projects/<project>/` dirs instead of `aios/deliverables/`.
+_From: data/aios-health-2026-03-30.md_

@@ -51,3 +51,52 @@ _Notes added during triage will appear below each item._
 - [ ] gstack-only skills in CLAUDE.md (`/plan-ceo-review`, `/design-consultation`, `/canary`, etc.) have no local file in `skills/` — by design, flagged for awareness if gstack is ever removed
 
 _Notes added during triage will appear below each item._
+
+---
+
+## Scan 3 — 2026-03-30 (third run)
+
+### Summary
+- 0 critical · 1 warning · 1 info
+- Scanned: 19 skill files (skills/*.md — `git-audit` added since Scan 2), skills-map.md, CLAUDE.md, session system reminder
+- **New since Scan 2:** `git-audit` skill file added and plugin installed
+
+### Critical
+_None._
+
+### Warning
+- [x] `git-audit` — no trigger phrases in frontmatter description or skill body ✓ fixed: added "Use when user says..." triggers to frontmatter description
+
+### Info
+- [x] `git-audit` — missing `user-invocable: true` frontmatter field ✓ fixed: added `user-invocable: true` and `argument-hint`
+
+_Notes added during triage will appear below each item._
+
+---
+
+## Scan 4 — 2026-03-30 (fourth run)
+
+### Summary
+- 2 critical · 3 warnings · 4 info
+- Scanned: 20 AIOS skill files (skills/*.md), skills-map.md, CLAUDE.md, session system reminder
+- **New since Scan 3:** `context-clean`, `session-redo`, `skill-scan` added since Scan 3; now 20 skill files total
+
+### Critical
+
+- [x] `pod-mapper` — AIOS local (`skills/pod-mapper.md`) AND `superpowers:pod-mapper` both active in session. Same purpose, same triggers. Not in known-duplicates table — no resolution documented. ✓ documented in known-duplicates table: keep local — AIOS version has chain handoffs superpowers copy lacks
+- [x] `business-setup` — AIOS local (`skills/business-setup.md`) AND `superpowers:business-setup` both active in session. Same purpose, same triggers. Not in known-duplicates table — no resolution documented. ✓ documented in known-duplicates table: keep local — same reason
+
+### Warning
+
+- [x] `superpowers:brainstorm` — deprecated skill still active in session; replaced by `superpowers:brainstorming`. Stale plugin registration. ✓ no action needed — managed redirect stub in superpowers plugin package (v5.0.6) with `disable-model-invocation: true`; cannot be removed from this side
+- [x] `superpowers:execute-plan` — deprecated skill still active in session; replaced by `superpowers:executing-plans`. Stale plugin registration. ✓ no action needed — same reason
+- [x] `superpowers:write-plan` — deprecated skill still active in session; replaced by `superpowers:writing-plans`. Stale plugin registration. ✓ no action needed — same reason
+
+### Info
+
+- [x] `git-audit` — missing both `## Next Step` and `## See Also`; no chain connections for discoverability ✓ added `## See Also` section
+- [x] `skill-scan` — missing `## Next Step` (has `## See Also`); not in a formal chain but maintenance loop is documented in skills-map ✓ added `## Next Step`
+- [x] `session-redo` — missing `## Next Step` (has `## See Also`); orphaned from session-loop chain ✓ added `## Next Step`
+- [x] `context-clean` — missing `## Next Step` (has `## See Also`); maintenance chain is informal ✓ added `## Next Step`
+
+_Notes added during triage will appear below each item._

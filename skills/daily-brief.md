@@ -28,9 +28,18 @@ Session start. Cut the fog. Pick your focus before you open a file.
 1. Read `context/my-goals.md`. Note the top 3 priorities.
 2. Read `data/notes.md`. Find all entries from yesterday. Extract any tagged #blocker, #next, or #decision.
 3. List files in `deliverables/`. Flag any that look like open plans — filenames containing "plan", "pod-map", "brief", or "v3".
-4. If an argument was passed (e.g. `/daily-brief backend`), treat it as a focus constraint.
+4. Check for a recent `data/aios-health-*.md` file (within the last 7 days). If one exists, read its **Suggested Improvement Tasks** section and extract: (a) all Immediate items, (b) up to 2 This week items. Hold these — they may surface in the agenda.
+5. If an argument was passed (e.g. `/daily-brief backend`), treat it as a focus constraint.
 
 ### Phase 2: Propose the agenda
+
+Count all `#next` entries in `data/notes.md`. If 5 or more, prepend this line before the agenda block:
+
+> **Maintenance flag:** 5+ open #next threads — consider running `/context-clean` this session.
+
+If a recent health report was found in Phase 1 with Immediate improvement tasks, prepend this line:
+
+> **AIOS health flag:** [N] immediate improvement task(s) from last health report — see AIOS Health section below.
 
 Present this in a compact block. No preamble. Lead with yesterday's threads:
 
@@ -45,9 +54,17 @@ Present this in a compact block. No preamble. Lead with yesterday's threads:
 1. [Most important task tied to top goal in my-goals.md]
 2. [Second option if genuinely ambiguous]
 3. [Third option only if 1 and 2 are both blocked]
+
+**AIOS Health** _(only if a recent health report exists)_
+Immediate:
+- [ ] [task from Suggested Improvement Tasks → Immediate]
+This week:
+- [ ] [task 1]
+- [ ] [task 2]
+Report: data/aios-health-YYYY-MM-DD.md
 ```
 
-3 tasks max. If everything is Captionate v3, pick the highest-priority unblocked sub-task.
+3 tasks max for the main focus. The AIOS Health section is supplemental — it does not replace the focus tasks, it runs alongside them. Omit the AIOS Health section entirely if no report exists within the last 7 days.
 
 ### Phase 3: Confirm or adjust
 
@@ -75,6 +92,18 @@ Write `data/daily-brief-YYYY-MM-DD.md`:
 
 ## Goals Alignment
 [one sentence: how today's focus maps to 90-day priorities]
+
+## AIOS Health Tasks
+_(omit this section entirely if no health report within last 7 days)_
+
+Immediate:
+- [ ] [task]
+
+This week:
+- [ ] [task]
+- [ ] [task]
+
+_From: data/aios-health-YYYY-MM-DD.md_
 ```
 
 Confirm: `Brief saved. Go build.`

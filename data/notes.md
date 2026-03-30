@@ -1,5 +1,17 @@
 
 ### [2026-03-30] — AIOS
+Pi integration — agreed approach B: oh-my-pi standalone + Claude Code plugs in via AIOS skills. Start with pi --print delegation, upgrade to Overstory coordination later. Hermes stays as option. Branch: feature/pi-agent-integration #next
+
+### [2026-03-30] — AIOS
+Run `/aios-health` to validate new skill end-to-end; address any Critical findings #next
+
+### [2026-03-30] — hermes-integration
+Write 4 answered questions into hermes-integration/status.md, then clone + install hermes-agent #next
+
+### [2026-03-30] — AIOS
+Execute Scan 4 fix plan (`/home/roking/.claude/plans/zippy-roaming-fairy.md`): document pod-mapper/business-setup duplicates in skill-scan.md known-duplicates table, annotate deprecated warnings as no-action, add See Also/Next Step to git-audit + skill-scan + session-redo #next
+
+### [2026-03-30] — AIOS
 Build a skill that automatically creates skills when needed — for the self-improvement/Hermes plan. Side plan: do this next. #next #idea
 
 ### [2026-03-30] — AIOS

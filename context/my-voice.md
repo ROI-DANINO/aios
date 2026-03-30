@@ -1,4 +1,5 @@
 # My Voice
+<!-- last-updated: 2026-03-30 -->
 
 ## Communication Style
 Direct, no-BS, technical, casual. Gets to the point immediately. Structured thinking but not formal. Writes like a developer who respects the reader's time.

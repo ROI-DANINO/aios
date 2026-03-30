@@ -2,6 +2,7 @@
 name: skills-map
 description: Layered reference of all AIOS and Superpowers skills — organized by workflow phase, domain, and trigger phrases. Used by skill-navigator and as a personal cheat sheet.
 type: reference
+user-invocable: false
 ---
 
 # Skills Map
@@ -101,6 +102,7 @@ type: reference
 | `systematic-debugging` | dev | bug, error, this is broken, something's broken, something's wrong, something isn't working, not working, failing, unexpected behavior | Diagnose bugs before proposing fixes |
 | `verification-before-completion` | dev | is this done yet, let me verify, check before I commit, make sure this works, verify this works | Verify before claiming done — evidence first |
 | `writing-skills` | system | create a skill, new skill, update this skill, improve this skill | Create or improve skills — always update skills-map after |
+| `skill-scan` | system | scan my skills, audit the skill registry, skill-scan, what skills are broken, orphaned, check skill wiring | Audit all skills — finds missing registrations, duplicates, chain gaps; writes dated report + feeds backlog |
 | `office-hours` | dev  | I'm stuck, think this through, office hours, help me reason | Unstructured problem-solving session               |
 | `browse`       | dev  | browse, open URL, scrape, automate this page, go to URL    | Real Chromium automation via Playwright              |
 | `conductor`    | dev  | run in parallel, spin up agents, conductor, multiple workstreams | Parallel Claude Code sessions for independent tasks |
@@ -112,6 +114,7 @@ type: reference
 | `git-audit`    | dev    | git audit, scan this repo, stale branches, commit quality, repo health, github audit, /git-audit | Interactive git + GitHub repo audit — 4 phases, auto-fix safe issues, optional structured report |
 | `skill-scan`   | system | /skill-scan, audit skills, scan skills, skill audit, check skills, what skills are broken, what skills are missing | Full skill audit — finds missing registrations, chain gaps, duplicates. Saves tiered report + feeds backlog. Optional interactive triage per finding. |
 | `context-clean` | system | /context-clean, clean up AIOS data, prune data, compact notes, AIOS maintenance, data is getting fat | Periodic maintenance — archive stale daily-briefs/scan reports, compact notes.md, check memory health |
+| `aios-health`  | system | /aios-health, audit my AIOS, system health check, how healthy is my AIOS, full AIOS audit, something feels off with my system | Full system audit — 5 parallel subagents covering skill health, memory, data hygiene, self-improvement, token efficiency. Report saved to data/, auto-fixes with confirmation, conditional context-clean |
 
 ---
 
@@ -141,3 +144,4 @@ Quick reference for skill sequencing. Each `→` is a hard handoff defined in th
 | **Multi-agent** | `/pod` → `/pod-review` → `superpowers:finishing-a-development-branch` |
 | **UX** | `/ux-gate` → (build) → `/ux-scan` → `/dev-audit` |
 | **Maintenance** | every 3-5 sessions: `/daily-brief` (if 5+ open #next threads) → `/context-clean` |
+| **Health audit** | `/aios-health` → (conditional) `/context-clean` |

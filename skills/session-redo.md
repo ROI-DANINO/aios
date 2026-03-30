@@ -68,6 +68,10 @@ After writing: show the user the rewritten entry and confirm: "Session log updat
 - **Multiple entries need fixing** — ask which ones, fix one at a time.
 - **Log file doesn't exist yet** — run `/session-close` instead.
 
+## Next Step
+
+After the log is corrected: run `/session-close` again if needed, or continue with `/daily-brief` next session.
+
 ## See Also
 
 - `/session-close` — writes the original entry; run this at end of every session

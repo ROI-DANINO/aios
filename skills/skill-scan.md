@@ -175,6 +175,8 @@ Use this table in Phase 2 Critical detection. If both sides of a pair are presen
 | `skills/ship.md` | gstack `/ship` | Remove local — gstack has version bump + changelog |
 | `skills/retro.md` | gstack `/retro` | Keep local — reads AIOS session logs |
 | `skills/office-hours.md` | gstack `/office-hours` | Keep local — routes to debugging |
+| `skills/pod-mapper.md` | `superpowers:pod-mapper` | Keep local — AIOS version has `## Next Step` + `## See Also` chain handoffs that superpowers copy lacks |
+| `skills/business-setup.md` | `superpowers:business-setup` | Keep local — same reason |
 
 ---
 
@@ -186,6 +188,10 @@ Use this table in Phase 2 Critical detection. If both sides of a pair are presen
 - **`data/` doesn't exist** — Create it. Never fail silently.
 - **Backlog file missing** — Create it with the three-section template before appending.
 - **Finding already in backlog** — Skip it. Check by skill name + action text match.
+
+## Next Step
+
+After scan and triage: run `/session-close` to log the session, or `/context-clean` if backlog is getting large.
 
 ## See Also
 

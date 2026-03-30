@@ -1,4 +1,5 @@
 # ICP (Ideal Customer Profile)
+<!-- last-updated: 2026-03-30 -->
 
 > **Status:** Working hypothesis — not validated. Product is in self-use / POC phase.
 > Update this when self-use proves the system works and you start thinking about selling.

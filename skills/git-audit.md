@@ -1,7 +1,13 @@
 ---
 name: git-audit
-description: Interactive git and GitHub repo audit — stale branches, commit quality, repo settings, optional PR/issue/CI scan. Works on any repo. Auto-fixes safe issues, confirms destructive ones.
+description: >
+  Interactive git and GitHub repo audit — stale branches, commit quality, repo settings,
+  optional PR/issue/CI scan. Works on any repo. Auto-fixes safe issues, confirms destructive ones.
+  Use when user says "git audit", "scan this repo", "stale branches", "commit quality",
+  "repo health", "github audit", or "/git-audit".
 type: utility
+user-invocable: true
+argument-hint: "[owner/repo | report] — defaults to current repo"
 ---
 
 # Git Audit Skill
@@ -347,3 +353,9 @@ Score calculation:
 
 Announce when saved:
 > "Report saved to `data/git-audit-owner-repo-YYYY-MM-DD.md`"
+
+## See Also
+
+- `/skill-scan` — full skill audit; complement to git-audit for repo health
+- `/context-clean` — periodic AIOS data maintenance
+- `/session-close` — run after audit to log findings

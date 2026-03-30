@@ -254,3 +254,184 @@ Answer 4 open questions in `~/Desktop/Projects/hermes-integration/status.md`, th
 
 ## Notes
 None
+
+---
+
+## Session 14 — closing
+
+## What Shipped
+- Executed Scan 4 fix plan in full (7 of 8 steps — step 8 is this session-close)
+- Added `pod-mapper` + `business-setup` to Known Duplicate Pairs table in `skills/skill-scan.md` (keep local — AIOS versions have chain handoffs superpowers copies lack)
+- Annotated 3 deprecated superpowers redirect stubs (brainstorm, execute-plan, write-plan) as no-action-needed in scan report
+- Added `## See Also` to `skills/git-audit.md`
+- Added `## Next Step` to `skills/skill-scan.md`
+- Added `## Next Step` to `skills/session-redo.md`
+- Synced all 3 plugin copies
+- Marked all Scan 4 findings resolved in `data/skill-scan-2026-03-30.md` and `data/skill-improvement-backlog.md`
+
+## Blocked / Unresolved
+- `context-clean` still missing `## Next Step` (left intentionally — not in fix plan scope)
+- Hermes Phase 0 still not started
+- Auto-skill-creation skill not yet built
+
+## Next Session — First Task
+Answer 4 open questions in `~/Desktop/Projects/hermes-integration/status.md`, then start Phase 0: clone and install hermes-agent
+
+## Notes
+None
+
+---
+
+## Session 15 — closing
+
+## What Shipped
+- Ran daily-brief and chose Hermes Phase 0 as session focus
+- Answered all 4 open questions blocking Phase 1:
+  1. Primary interface: Claude Code stays primary (Hermes is the engine layer)
+  2. Model config: Claude exclusively (no multi-provider routing yet)
+  3. Persistence: per-task invocations (no always-on daemon)
+  4. Mobile access: later (not in early phases)
+- Session ended before Phase 0 clone/install was executed
+
+## Blocked / Unresolved
+- Hermes Phase 0 clone + install still not done (decisions made, execution pending)
+
+## Next Session — First Task
+Write answers into `hermes-integration/status.md`, then clone + install hermes-agent (`pip install -e ".[all]"`)
+
+## Notes
+None
+
+---
+
+## Session 16 — closing
+
+## What Shipped
+- Ran daily-brief, chose Scan 4 fix plan as session focus
+- Verified all Scan 4 work was already completed in Session 14 — nothing left to execute
+- Confirmed plugin copies for git-audit, skill-scan, session-redo are in sync with source files
+
+## Blocked / Unresolved
+- Hermes Phase 0 clone + install still not done
+- Auto-skill-creation skill not yet built
+
+## Next Session — First Task
+Answer 4 open questions into `hermes-integration/status.md`, then clone + install hermes-agent
+
+## Notes
+None
+
+---
+
+## Session 18 — closing
+
+## What Shipped
+- Ran daily-brief, chose Hermes Phase 0 as session focus
+- Answered all 4 open questions (corrected from session 15 — answers updated):
+  1. Primary interface: Both Claude Code and Hermes are primary — seamless switching. Shared memory is the core requirement.
+  2. Model config: Claude Code = Claude. Hermes = OpenRouter, mid-tier model for skill execution.
+  3. Persistence: Per-task invocations for now; promote to daemon in Phase 3+.
+  4. Mobile access: Separate task, not part of this integration.
+- Wrote all answers into `hermes-integration/status.md`
+
+## Blocked / Unresolved
+- Hermes Phase 0 clone + install still not executed (decisions done, execution pending)
+
+## Next Session — First Task
+Claude subagent: clone hermes-agent, install, read skills/ dir, write setup notes. User: configure .env + run `hermes chat` interactively.
+
+## Notes
+make a plan for claude to do whatever it can on its own with subagents and leave whatever needs me to see think lead or whatever in a followup task
+
+---
+
+## Session 17 — closing
+
+## What Shipped
+- Built `/aios-health` skill — full AIOS system audit orchestrating 5 parallel subagents (skill health, memory/context, data hygiene, self-improvement, token efficiency). Report saved to `data/aios-health-YYYY-MM-DD.md`. Auto-fixes with 3-tier confirmation system. Conditionally triggers context-clean on data bloat.
+- Installed as plugin: `aios-health@aios` registered in marketplace.json, plugin files created, installed via `claude plugin install`.
+- Updated `skills/skills-map.md` — added aios-health row to Phase 4 and "Health audit" workflow chain entry.
+- Updated `CLAUDE.md` — added `/aios-health` to skills index.
+- Extended aios-health report with **Suggested Improvement Tasks** section — findings formatted as `- [ ]` backlog items (Immediate / This week / When time allows) with source attribution.
+- Updated `daily-brief` skill — now checks for recent `data/aios-health-*.md` (within 7 days); surfaces Immediate + up to 2 This week tasks in the agenda; adds `## AIOS Health Tasks` section to saved brief file.
+
+## Blocked / Unresolved
+- Hermes Phase 0 clone + install still not done
+- Auto-skill-creation skill not yet built
+- skills that need updating to use `~/Desktop/Projects/<project>/` dirs still deferred
+
+## Next Session — First Task
+Run `/aios-health` to validate the new skill end-to-end, then address any Critical findings it surfaces.
+
+## Notes
+None
+
+---
+
+## Session 19 — closing
+
+## What Shipped
+- Ran daily-brief, chose Hermes Phase 0 as session focus
+- Discovered Hermes open questions already answered — execution is the remaining step
+- Researched Pi coding agent (oh-my-pi by can1357) — features, community sentiment, multi-agent capabilities
+- Researched multi-agent orchestration patterns across Claude Code, Hermes, and Pi
+- Decided to expand Hermes integration plan to include oh-my-pi as a third agent
+- Key findings: oh-my-pi has JSON-RPC 2.0 interface, native MCP support, swarm-extension for agent teams; Overstory coordinates Pi + Claude Code in mixed-runtime teams
+- OSS equivalents found for all Hermes features: Engram (memory, MCP-native), modelcontextprotocol/servers (40+ tools), AutoSkill (self-improvement), LangBot (multi-platform chat)
+- Agreed on Approach B: oh-my-pi as primary engine, Claude Code plugs in via AIOS skills (`pi --print` → `pi --mode rpc` → Overstory)
+- Created branch `feature/pi-agent-integration` for this work
+- Hermes stays as an option alongside oh-my-pi
+
+## Blocked / Unresolved
+- oh-my-pi integration design not yet written (brainstorming started, spec not written)
+- Hermes Phase 0 clone + install still not executed
+- Auto-skill-creation skill not yet built
+
+## Next Session — First Task
+Continue brainstorming → write spec for tri-agent system (oh-my-pi + Claude Code + Hermes) on branch `feature/pi-agent-integration`
+
+## Notes
+None
+
+---
+
+## Session 20 — closing
+
+## What Shipped
+- Ran daily-brief — chose Pi integration (option 3) as session focus
+- Started brainstorming tri-agent system spec (oh-my-pi + Claude Code + Hermes)
+- Confirmed scope: full tri-agent spec covering all three stages (pi --print → pi --mode rpc → Overstory)
+- Session ended before first clarifying question was answered
+
+## Blocked / Unresolved
+- Tri-agent system spec not yet written (brainstorm in progress, scope confirmed)
+- Hermes Phase 0 clone + install still not executed
+- Auto-skill-creation skill not yet built
+
+## Next Session — First Task
+Continue brainstorming tri-agent spec — answer scope/trigger question (how Pi gets invoked from AIOS), then proceed through design
+
+## Notes
+None
+
+---
+
+## Session 13 — closing
+
+## What Shipped
+- Ran full `/skill-scan` (Scan 4) — 20 skill files audited
+- Found 2 Critical (pod-mapper + business-setup duplicates with superpowers), 3 Warnings (deprecated superpowers redirect stubs), 4 Info (missing Next Step/See Also on git-audit, skill-scan, session-redo, context-clean)
+- Wrote Scan 4 report section in `data/skill-scan-2026-03-30.md`
+- Updated `data/skill-improvement-backlog.md` with new Critical/Warning items
+- Wrote fix plan (approved, execution deferred by user — carry to next session)
+
+## Blocked / Unresolved
+- Scan 4 findings not yet fixed (plan at `/home/roking/.claude/plans/zippy-roaming-fairy.md`)
+- Hermes Phase 0 still not started
+- Auto-skill-creation skill not yet built
+
+## Next Session — First Task
+Execute Scan 4 fix plan: document pod-mapper/business-setup in known-duplicates table, annotate deprecated warnings, add See Also/Next Step to git-audit, skill-scan, session-redo
+
+## Notes
+None

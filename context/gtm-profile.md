@@ -1,4 +1,5 @@
 # GTM Profile
+<!-- last-updated: 2026-03-30 -->
 
 ## Current Offer
 - **Status:** Building — currently used internally (self as client)

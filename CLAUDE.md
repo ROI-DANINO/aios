@@ -40,6 +40,7 @@ Skills in `skills/` are invoked as slash commands in Claude Code:
 - `/system-architect` — Architecture design walkthrough
 - `/context-clean` — Periodic data maintenance: archive stale daily-briefs and skill-scan reports, compact notes.md (semantic inference), check memory health
 - `/session-redo` — Fix an inaccurate or incomplete session log entry; use when session-close ran with bad info or subagents didn't log
+- `/aios-health` — Full system health audit: 5 parallel subagents cover skill health, memory, data hygiene, self-improvement backlog, token efficiency; saves report to `data/aios-health-YYYY-MM-DD.md`; auto-fixes with confirmation; triggers context-clean on data bloat
 
 The Superpowers skill library (brainstorming → plans → TDD → code review → finish branch) governs all dev work. These are installed via the Superpowers GitHub integration and listed in the session-start system reminder.
 

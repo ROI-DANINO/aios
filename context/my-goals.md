@@ -1,4 +1,5 @@
 # My Goals
+<!-- last-updated: 2026-03-30 -->
 
 ## Top 3 Priorities — Next 90 Days
 1. Coding — ship Captionate v3
