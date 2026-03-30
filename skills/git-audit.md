@@ -452,3 +452,40 @@ curl -s -X POST \
   -d "{\"ref\":\"$DEFAULT_BRANCH\"}" \
   "https://api.github.com/repos/$GITHUB_USER/$REPO/actions/workflows/$WORKFLOW_ID/dispatches"
 ```
+
+---
+
+## Report Mode
+
+Only triggered when invoked as `/git-audit report`. After all phases complete, save a structured report.
+
+**Output path:** `data/git-audit-<owner>-<repo>-<YYYY-MM-DD>.md`
+
+```bash
+REPORT_DATE=$(date +%Y-%m-%d)
+REPORT_PATH="data/git-audit-${GITHUB_USER}-${REPO}-${REPORT_DATE}.md"
+```
+
+After triage is complete, write this structure to `$REPORT_PATH` (filling in actual findings):
+
+```markdown
+# Git Audit — owner/repo — YYYY-MM-DD
+
+## Health Score: N/10
+
+Score calculation:
+- Start at 10
+- -1 per missing repo setup item (description, topics, README, branch protection) — max -4
+- -1 per unresolved stale branch remaining after cleanup — max -2
+- -1 per commit quality flag category with 3+ instances (large commits, non-conventional, direct pushes) — max -2
+- -1 if CI has failing runs on default branch
+- -1 if 5+ issues are stale/unlabeled (only if phase 4 was run)
+
+### Repo Setup      ✅/⚠️  X/6 checks passed
+### Stale Branches  ✅/⚠️  N found, N cleaned, N remaining
+### Commit Quality  ✅/⚠️  N flags (large: X, non-conventional: Y, direct pushes: Z)
+### PRs/Issues/CI   ✅/⚠️/skipped
+```
+
+Announce when saved:
+> "Report saved to `data/git-audit-owner-repo-YYYY-MM-DD.md`"
