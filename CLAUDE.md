@@ -38,6 +38,8 @@ Skills in `skills/` are invoked as slash commands in Claude Code:
 - `/business-setup` — Onboarding wizard for new sessions or reconfiguration
 - `/pod-mapper [engine]` — Maps a business function (acquisition/delivery/support/operations) into automatable workflows
 - `/system-architect` — Architecture design walkthrough
+- `/context-clean` — Periodic data maintenance: archive stale daily-briefs and skill-scan reports, compact notes.md (semantic inference), check memory health
+- `/session-redo` — Fix an inaccurate or incomplete session log entry; use when session-close ran with bad info or subagents didn't log
 
 The Superpowers skill library (brainstorming → plans → TDD → code review → finish branch) governs all dev work. These are installed via the Superpowers GitHub integration and listed in the session-start system reminder.
 

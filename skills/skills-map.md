@@ -111,6 +111,7 @@ type: reference
 | `gstack-upgrade` | system | update gstack, upgrade skills, latest gstack           | Update gstack to latest version                      |
 | `git-audit`    | dev    | git audit, scan this repo, stale branches, commit quality, repo health, github audit, /git-audit | Interactive git + GitHub repo audit — 4 phases, auto-fix safe issues, optional structured report |
 | `skill-scan`   | system | /skill-scan, audit skills, scan skills, skill audit, check skills, what skills are broken, what skills are missing | Full skill audit — finds missing registrations, chain gaps, duplicates. Saves tiered report + feeds backlog. Optional interactive triage per finding. |
+| `context-clean` | system | /context-clean, clean up AIOS data, prune data, compact notes, AIOS maintenance, data is getting fat | Periodic maintenance — archive stale daily-briefs/scan reports, compact notes.md, check memory health |
 
 ---
 
@@ -119,6 +120,7 @@ type: reference
 | Skill | Domain | Triggers | What it does |
 |-------|--------|----------|--------------|
 | `session-close` | business | wrap up, end session, I'm done for today, close out, session summary, closing my laptop, done for now, signing off, logging off, heading out | End-of-session log, open threads, next session setup |
+| `session-redo` | business | redo the session log, fix the log, that's not what happened, the log is wrong, update what really happened | Rewrites an inaccurate or incomplete session log entry based on git evidence |
 
 ---
 
@@ -138,3 +140,4 @@ Quick reference for skill sequencing. Each `→` is a hard handoff defined in th
 | **Business** | `/business-setup` → `/pod-mapper` → `/pod` |
 | **Multi-agent** | `/pod` → `/pod-review` → `superpowers:finishing-a-development-branch` |
 | **UX** | `/ux-gate` → (build) → `/ux-scan` → `/dev-audit` |
+| **Maintenance** | every 3-5 sessions: `/daily-brief` (if 5+ open #next threads) → `/context-clean` |
