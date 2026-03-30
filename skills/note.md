@@ -62,6 +62,10 @@ Do not summarise. Do not add commentary. Just confirm and stop.
 - **Just a tag, no text** — Ask: "What's the note?"
 - **Very long note** — Log without truncation. If 3+ sentences, suggest: "This might belong in a deliverable — want me to save it there instead?"
 
+## Next Step
+
+When done capturing: return to your current task. At end of session, run `/session-close` to pull these notes into the log.
+
 ## See Also
 
 - `/daily-brief` — session start, sets the agenda this note feeds into

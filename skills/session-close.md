@@ -108,6 +108,10 @@ No summary. No motivational sign-off. Log and done.
 - **Multiple sessions in one day** — Append, never overwrite.
 - **`data/` doesn't exist** — Create it. Never fail.
 
+## Next Step
+
+After closing: start the next session with `/daily-brief` to pick up the queued next task.
+
 ## See Also
 
 - `/daily-brief` — run at the start of the next session to pick up where you left off
