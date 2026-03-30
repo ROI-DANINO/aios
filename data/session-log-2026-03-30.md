@@ -125,3 +125,24 @@ Run `/skill-scan` to confirm clean inventory (0 critical, 0 warnings expected).
 
 ## Notes
 None
+
+---
+
+## Session 7 — closing
+
+## What Shipped
+- Ran `/git-audit` on `ROI-DANINO/aios` using MCP plugin (no token)
+- Found: no README, no branch protection, default branch is `master` not `main`, no stale branches, 1 non-conventional commit (`init:`), all commits are direct pushes (expected for solo repo)
+- Created `README.md` and pushed via MCP `create_or_update_file`
+- Rewrote `skills/git-audit.md` to use GitHub MCP plugin for all reads and `gh` CLI for mutations — removed all `GITHUB_TOKEN` / curl dependencies
+- Synced updated skill to plugin path
+- Committed and pushed all outstanding local changes (22 commits ahead of origin resolved)
+
+## Blocked / Unresolved
+- Branch protection on `master` still not set — requires `gh` CLI or token, MCP has no protection endpoint
+
+## Next Session — First Task
+Run `/skill-scan` to confirm clean inventory (0 critical, 0 warnings expected).
+
+## Notes
+None
