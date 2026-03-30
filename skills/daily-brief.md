@@ -9,6 +9,10 @@ description: >
   of any working session.
 user-invocable: true
 argument-hint: "[optional focus area, e.g. 'backend']"
+tools:
+  - Read
+  - Write
+  - Glob
 ---
 
 # Daily Brief

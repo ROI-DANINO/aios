@@ -5,6 +5,8 @@ description: >
   based on what the user is doing — no announcement, no confirmation. Fires automatically
   at session start and after every user message.
 user-invocable: false
+tools:
+  - Read
 ---
 
 # Skill Navigator

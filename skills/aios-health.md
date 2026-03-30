@@ -9,6 +9,13 @@ description: >
   "how healthy is my AIOS", "full AIOS audit", or "something feels off with my system".
 user-invocable: true
 argument-hint: "[--dry-run | --report-only]"
+tools:
+  - Read
+  - Write
+  - Glob
+  - Grep
+  - Bash
+  - Agent
 ---
 
 # AIOS Health

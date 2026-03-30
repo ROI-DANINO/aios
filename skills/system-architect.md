@@ -3,6 +3,12 @@ name: system-architect
 description: Architecture design walkthrough for AIOS — walks through each section interactively and produces a complete architecture brief
 user-invocable: true
 argument-hint: "[optional: focus area]"
+tools:
+  - Read
+  - Write
+  - Edit
+  - Glob
+  - Grep
 ---
 
 # AIOS Architecture Brief Template

@@ -15,6 +15,11 @@ description: >
   triage on one skill) and /skill-scan [skill-name] (scope scan to a single skill only).
 user-invocable: true
 argument-hint: "[skill-name] | triage [skill-name]"
+tools:
+  - Read
+  - Write
+  - Glob
+  - Grep
 ---
 
 # Skill Scan

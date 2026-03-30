@@ -8,6 +8,11 @@ description: >
   "closing out", "end session", "signing off", "bye", or similar.
 user-invocable: true
 argument-hint: "[optional note]"
+tools:
+  - Read
+  - Write
+  - Edit
+  - Glob
 ---
 
 # Session Close

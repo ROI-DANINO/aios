@@ -8,6 +8,10 @@ description: >
   "loose ends", "ux check", "before we build", "who uses this", "what's the purpose of".
 user-invocable: true
 argument-hint: "[feature description | audit]"
+tools:
+  - Read
+  - Glob
+  - Grep
 ---
 
 # UX Gate

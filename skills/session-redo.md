@@ -6,6 +6,11 @@ description: >
   "update what really happened", or any correction to a prior session-close entry.
 user-invocable: true
 argument-hint: "[optional: session number or date to redo — defaults to latest]"
+tools:
+  - Read
+  - Write
+  - Edit
+  - Glob
 ---
 
 # Session Redo

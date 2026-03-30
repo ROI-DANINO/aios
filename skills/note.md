@@ -8,6 +8,10 @@ description: >
   "quick note", or wants to flag something without losing flow.
 user-invocable: true
 argument-hint: '"your note text here #tag"'
+tools:
+  - Read
+  - Write
+  - Edit
 ---
 
 # Note

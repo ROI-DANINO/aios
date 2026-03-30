@@ -10,6 +10,12 @@ description: >
   "compact notes", "AIOS maintenance", or "data is getting fat".
 user-invocable: true
 argument-hint: "[--dry-run | --notes-only | --memory-only]"
+tools:
+  - Read
+  - Write
+  - Edit
+  - Glob
+  - Bash
 ---
 
 # Context Clean

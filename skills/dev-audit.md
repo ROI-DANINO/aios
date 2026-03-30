@@ -7,6 +7,11 @@ description: >
   Reads PLAN.md, runs tests, checks git log — produces a structured status report.
 user-invocable: true
 argument-hint: "[path/to/project] — defaults to current working directory"
+tools:
+  - Read
+  - Glob
+  - Grep
+  - Bash
 ---
 
 # Dev Audit

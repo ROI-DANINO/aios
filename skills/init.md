@@ -8,6 +8,12 @@ description: >
   "help me organize this", or when starting work on an existing codebase for the first time.
 user-invocable: true
 argument-hint: "[optional: path to project dir, defaults to cwd]"
+tools:
+  - Read
+  - Write
+  - Edit
+  - Glob
+  - Bash
 ---
 
 # Project Init

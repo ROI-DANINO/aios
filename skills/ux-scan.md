@@ -8,6 +8,11 @@ description: >
   "scan for ux problems", "ux problems".
 user-invocable: true
 argument-hint: "[path to scan, defaults to current project]"
+tools:
+  - Read
+  - Glob
+  - Grep
+  - Bash
 ---
 
 # UX Scan
