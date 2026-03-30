@@ -146,3 +146,92 @@ Run `/skill-scan` to confirm clean inventory (0 critical, 0 warnings expected).
 
 ## Notes
 None
+
+---
+
+## Session 8 — closing
+
+## What Shipped
+- Researched NousResearch/hermes-agent and current AIOS skills system in depth (parallel agents)
+- Designed full 5-phase AIOS × Hermes integration plan
+- Scaffolded `~/Desktop/Projects/hermes-integration/` — status.md, plan.md, log.md
+- Fixed broken `~/Desktop/Projects/CLAUDE.md` symlink → real cross-project handbook
+- Created `~/.aios-archive/` — backup dir for retiring files
+- Saved AIOS core vision to memory: token-efficient, auto-cleaned, self-improving AI OS
+- Identified skills update backlog: daily-brief, session-close, dev-audit, pod-mapper, business-setup need updating to use project context dirs instead of deliverables/
+
+## Blocked / Unresolved
+- 4 open questions before Phase 1 (Memory Bridge) can start — logged in hermes-integration/status.md
+- Skills not yet updated to use new project context dir structure (deferred — do AIOS restructure separately)
+
+## Next Session — First Task
+Answer the 4 open questions in `~/Desktop/Projects/hermes-integration/status.md`, then start Phase 0: clone and install hermes-agent locally
+
+## Notes
+hermes integration planning session — project dir scaffolded, skills update backlog identified
+
+---
+
+## Session 9 — closing
+
+
+## What Shipped
+- Built `skills/context-clean.md` — full 5-phase periodic data maintenance skill (archive briefs/scans, compact notes.md via semantic inference, memory health check)
+- Registered and installed `context-clean` as AIOS plugin (`claude plugin install context-clean@aios`)
+- Updated `skills/skills-map.md` — added Phase 4 row and Maintenance workflow chain
+- Updated `CLAUDE.md` — added `/context-clean` to skill listing
+- Updated `skills/daily-brief.md` — added maintenance flag when 5+ open #next threads
+- Noted idea: agent skill to spawn multiple subagents for parallel tasks with dependency/blocking support
+
+## Blocked / Unresolved
+- Hermes Phase 0 still not started (deferred again this session)
+- Branch protection on `master` still not set
+
+## Next Session — First Task
+Answer the 4 open questions in `~/Desktop/Projects/hermes-integration/status.md`, then start Phase 0: clone and install hermes-agent locally
+
+## Notes
+None
+
+---
+
+## Session 10 — closing
+
+## What Shipped
+- Ran subagent-driven-development execution of `docs/superpowers/plans/2026-03-30-skill-inventory-redesign.md`
+- Dispatched 8 implementer subagents (one per task) — each verified target files, found all chain wiring, hardening, and deletions already complete from Session 4
+- Only net-new change confirmed: `data/skill-improvement-backlog.md` (already on master from Session 4)
+- Identified gap: subagents do not run `/session-close`, so there's no per-subagent audit trail — can't distinguish "pre-existing" from "done this session"
+- Saved feedback memory: subagent prompts must include a `/session-close` step going forward
+
+## Blocked / Unresolved
+- Hermes Phase 0 still not started (deferred 3 sessions now)
+- Subagent session-close gap not yet wired into implementer prompt templates
+
+## Next Session — First Task
+Either: answer 4 open questions in `hermes-integration/status.md` + start Phase 0
+Or: wire session-close into subagent dispatch prompts before next subagent-driven execution
+
+## Notes
+Lesson: when all subagents report "already done," ambiguity is real — session-close per subagent would resolve it. User flagged this.
+
+---
+
+## Session 11 — closing
+
+## What Shipped
+- Created `skills/session-redo.md` — skill for correcting inaccurate session log entries
+- Installed `session-redo` as AIOS plugin, registered in CLAUDE.md and skills-map
+- Saved feedback memory: subagents must run session-close after their work
+- Logged idea: build a skill that auto-creates skills as needed (for self-improvement/Hermes plan)
+
+## Blocked / Unresolved
+- Hermes Phase 0 still not started (deferred again)
+- Auto-skill-creation skill not yet built
+- Subagent session-close gap still not wired into prompt templates
+
+## Next Session — First Task
+Build a skill that automatically creates skills when needed — for the self-improvement/Hermes plan
+
+## Notes
+None

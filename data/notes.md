@@ -1,4 +1,13 @@
 
+### [2026-03-30] — AIOS
+Build a skill that automatically creates skills when needed — for the self-improvement/Hermes plan. Side plan: do this next. #next #idea
+
+### [2026-03-30] — AIOS
+Hermes Phase 0: answer 4 open questions in hermes-integration/status.md, then clone + install hermes-agent #next
+
+### [2026-03-30] — AIOS
+Build an agent skill to spawn multiple subagents for parallel tasks with dependency/blocking support #idea
+
 ### [2026-03-30] — AIOS (session 5)
 Restart Claude Code, verify /skill-scan works via Skill tool, then run full /skill-scan audit #next
 
@@ -16,3 +25,6 @@ UX gap resolution: skill-navigator body is nearly empty — document routing log
 
 ### [2026-03-29] — Captionate v3
 Idea parking lot — Paperclip integration: (1) automated research/data collection agent org for Captionate v3, (2) 50-persona simulation for testing chat/connection interface, (3) already have multi-agent coding via /pod + Agent Teams. Revisit when Captionate v3 reaches data/testing phase. #idea
+
+### [2026-03-30] — hermes-integration
+Answer 4 open questions in ~/Desktop/Projects/hermes-integration/status.md, then Phase 0: clone + install hermes-agent #next

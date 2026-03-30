@@ -12,3 +12,6 @@ Each entry below is a pointer to a memory file.
 - [session-close behavior](feedback_session_close.md) — No questions at close; derive from context, accept optional note argument
 - [Skill override vulnerability](project_skill-override-vulnerability.md) — Local skills can be shadowed by Superpowers versions; hardening is in-progress
 - [AIOS Plugin Infrastructure](project_aios-plugin-infrastructure.md) — skills/ files aren't slash commands; must be installed via ~/.claude/aios-plugins/ marketplace
+- [AIOS Core Vision](project_aios-vision.md) — Token-efficient, auto-cleaned, self-improving AI OS — evaluate every system decision against this
+- [Hermes Integration Project](project_hermes-integration.md) — Multi-phase AIOS × Hermes integration; plan at deliverables/hermes-integration-plan.md; Phase 0 next
+- [Subagents must end with session-close](feedback_subagent_session_close.md) — Always include /session-close in implementer subagent prompts so work gets logged
