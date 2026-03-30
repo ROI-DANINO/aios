@@ -330,3 +330,125 @@ If no issues found in a category, show: `  ✅ None found`
 
 End with:
 > "Commit quality check done — these are for awareness only, no automated fixes. Want me to also check open PRs, issues, and CI status?"
+
+---
+
+## Phase 4 — PRs, Issues, CI (on-demand)
+
+Only run if user says yes to the Phase 3 prompt.
+
+### Open PRs
+
+```bash
+PRS_JSON=$(gh_api "/repos/$GITHUB_USER/$REPO/pulls?state=open&per_page=20")
+echo "$PRS_JSON" | python3 -c "
+import json, sys
+from datetime import datetime, timezone
+prs = json.load(sys.stdin)
+now = datetime.now(timezone.utc)
+if not prs:
+    print('  ✅ No open PRs')
+else:
+    for pr in prs:
+        created = datetime.fromisoformat(pr['created_at'].replace('Z', '+00:00'))
+        age = (now - created).days
+        reviewers = len(pr.get('requested_reviewers', []))
+        reviewer_label = 'no reviewer' if reviewers == 0 else f'{reviewers} reviewer(s)'
+        print(f'  #{pr[\"number\"]}\t{age}d old\t{reviewer_label}\t{pr[\"title\"][:50]}')
+"
+```
+
+### Open Issues
+
+```bash
+ISSUES_JSON=$(gh_api "/repos/$GITHUB_USER/$REPO/issues?state=open&per_page=30")
+echo "$ISSUES_JSON" | python3 -c "
+import json, sys
+from datetime import datetime, timezone
+issues = json.load(sys.stdin)
+now = datetime.now(timezone.utc)
+flagged = []
+for i in issues:
+    if 'pull_request' in i: continue
+    updated = datetime.fromisoformat(i['updated_at'].replace('Z', '+00:00'))
+    stale_days = (now - updated).days
+    labels = [l['name'] for l in i['labels']]
+    assignees = len(i.get('assignees', []))
+    flags = []
+    if not labels: flags.append('unlabeled')
+    if stale_days > 30: flags.append(f'stale {stale_days}d')
+    if assignees == 0: flags.append('unassigned')
+    if flags:
+        flagged.append((i['number'], i['title'][:50], flags))
+if not flagged:
+    print('  ✅ No flagged issues')
+else:
+    for num, title, flags in flagged:
+        print(f'  #{num}\t{title}\t[{\", \".join(flags)}]')
+"
+```
+
+**Available actions:**
+
+Add labels to issues in batch (confirm once for all):
+```bash
+# For each ISSUE_NUMBER in user-approved list:
+curl -s -X POST \
+  -H "Authorization: Bearer $GITHUB_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d "{\"labels\":[\"<label>\"]}" \
+  "https://api.github.com/repos/$GITHUB_USER/$REPO/issues/$ISSUE_NUMBER/labels"
+```
+
+Close stale issues (confirm batch):
+> "Close these N issues with no activity in 30+ days? [y/n/skip]"
+
+```bash
+# Only after explicit y from user, for each ISSUE_NUMBER:
+curl -s -X PATCH \
+  -H "Authorization: Bearer $GITHUB_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"state":"closed","state_reason":"not_planned"}' \
+  "https://api.github.com/repos/$GITHUB_USER/$REPO/issues/$ISSUE_NUMBER"
+```
+
+### CI / GitHub Actions
+
+```bash
+RUNS_JSON=$(gh_api "/repos/$GITHUB_USER/$REPO/actions/runs?per_page=5")
+echo "$RUNS_JSON" | python3 -c "
+import json, sys
+data = json.load(sys.stdin)
+runs = data.get('workflow_runs', [])
+if not runs:
+    print('  ✅ No workflow runs found')
+else:
+    for r in runs:
+        icon = '✅' if r['conclusion'] == 'success' else ('❌' if r['conclusion'] == 'failure' else '🔄')
+        print(f'  {icon}  {r[\"name\"]}  ({r[\"head_branch\"]})  {r[\"created_at\"][:10]}')
+"
+```
+
+Retrigger failed workflow (confirm first):
+> "Retrigger `<workflow-name>` on `$DEFAULT_BRANCH`? [y/n]"
+
+```bash
+# Get workflow ID
+WORKFLOWS_JSON=$(gh_api "/repos/$GITHUB_USER/$REPO/actions/workflows")
+WORKFLOW_ID=$(echo "$WORKFLOWS_JSON" | python3 -c "
+import json, sys
+ws = json.load(sys.stdin)['workflows']
+name = '<workflow-name>'  # replace with actual name from findings
+for w in ws:
+    if w['name'] == name:
+        print(w['id'])
+        break
+")
+
+# Only run after explicit y from user
+curl -s -X POST \
+  -H "Authorization: Bearer $GITHUB_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d "{\"ref\":\"$DEFAULT_BRANCH\"}" \
+  "https://api.github.com/repos/$GITHUB_USER/$REPO/actions/workflows/$WORKFLOW_ID/dispatches"
+```
