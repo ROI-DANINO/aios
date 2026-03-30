@@ -254,3 +254,79 @@ done
 
 End with:
 > "Here's what I found — want me to fix anything, skip, or move to commit quality?"
+
+---
+
+## Phase 3 — Commit Quality
+
+Read-only phase. No actions — findings flagged for awareness only.
+
+```bash
+# Large commits (diff > 500 lines) in last 50 commits
+git log --oneline -50 --format="%H %s" 2>/dev/null | while IFS=' ' read -r SHA MSG; do
+  TOTAL=$(git diff --shortstat "$SHA^" "$SHA" 2>/dev/null | \
+    python3 -c "
+import sys, re
+line = sys.stdin.read()
+ins = int(re.search(r'(\d+) insertion', line).group(1) if re.search(r'(\d+) insertion', line) else 0)
+dels = int(re.search(r'(\d+) deletion', line).group(1) if re.search(r'(\d+) deletion', line) else 0)
+print(ins + dels)
+" 2>/dev/null || echo 0)
+  if [ "$TOTAL" -gt 500 ] 2>/dev/null; then
+    echo "LARGE	${SHA:0:8}	$TOTAL lines	$MSG"
+  fi
+done
+
+# Non-conventional commit messages
+git log --oneline -50 --format="%H %s" 2>/dev/null | \
+python3 -c "
+import sys, re
+pattern = re.compile(r'^(feat|fix|chore|docs|refactor|test|perf|ci|build|style)(\(.+\))?!?:')
+for line in sys.stdin:
+    parts = line.strip().split(' ', 1)
+    if len(parts) < 2: continue
+    sha, msg = parts
+    if not pattern.match(msg):
+        print(f'NON-CONV\t{sha[:8]}\t{msg}')
+"
+
+# Direct pushes to main (single-parent commits on default branch = not a merge commit)
+git log "origin/$DEFAULT_BRANCH" --format="%H %P %s" -20 2>/dev/null | \
+python3 -c "
+import sys
+for line in sys.stdin:
+    parts = line.strip().split()
+    if len(parts) < 2: continue
+    sha = parts[0]
+    # collect parent SHAs (40-char hex strings)
+    parents = []
+    i = 1
+    while i < len(parts) and len(parts[i]) == 40:
+        parents.append(parts[i])
+        i += 1
+    msg = ' '.join(parts[i:])
+    if len(parents) == 1:
+        print(f'DIRECT\t{sha[:8]}\t{msg}')
+"
+```
+
+Present findings:
+
+```
+📝  Commit Quality (last 50 commits)
+
+  LARGE COMMITS (>500 lines):
+    a1b2c3  Refactor entire auth module   (1,240 lines changed)
+
+  NON-CONVENTIONAL MESSAGES:
+    9f8e7d  "update stuff" — missing type prefix
+    3d4e5f  "WIP" — missing type prefix
+
+  DIRECT PUSHES TO main:
+    bb1234  fix null pointer in auth
+```
+
+If no issues found in a category, show: `  ✅ None found`
+
+End with:
+> "Commit quality check done — these are for awareness only, no automated fixes. Want me to also check open PRs, issues, and CI status?"
