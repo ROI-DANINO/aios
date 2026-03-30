@@ -27,7 +27,10 @@ Quick capture. One command. Back to work.
 
 1. Parse the argument. Extract any inline tags (#idea, #blocker, #decision, #next). If no tag present, write the note untagged.
 2. Determine today's date (YYYY-MM-DD format).
-3. Determine the current project. Check `memory/MEMORY.md` for active project. Default to "Captionate v3" if not set.
+3. Determine the current project dynamically — never hardcode a project name:
+   a. Check `memory/MEMORY.md` for the most recently mentioned active project.
+   b. If not found, run `git branch --show-current` in the working directory as a signal (branch names often encode the project).
+   c. If still ambiguous, ask the user: "Which project is this note for?"
 4. Format the note entry:
 
 ```
@@ -58,7 +61,7 @@ Do not summarise. Do not add commentary. Just confirm and stop.
 - **Multiple tags** — Keep all. `/note "retry logic broken #blocker #decision"` logs both.
 - **Note is a fragment** — Log as-is. It's a capture, not a draft.
 - **`data/notes.md` doesn't exist** — Create it. Never fail silently.
-- **No project context** — Default to "Captionate v3".
+- **No project context** — Follow step 3: check MEMORY.md, then git branch, then ask the user. Never default to a hardcoded project name.
 - **Just a tag, no text** — Ask: "What's the note?"
 - **Very long note** — Log without truncation. If 3+ sentences, suggest: "This might belong in a deliverable — want me to save it there instead?"
 

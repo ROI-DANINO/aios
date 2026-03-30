@@ -90,7 +90,19 @@ Scan the session for anything that should persist across sessions. Extract only 
 
 For each item worth saving: write it to `memory/[type]_[topic].md` using the standard frontmatter format, then add a pointer line to `memory/MEMORY.md`.
 
-### Phase 5: Close out
+### Phase 5: Memory confirmation
+
+After writing memory entries, count the total number of pointer lines in `memory/MEMORY.md` (lines that are not headings, blank, or the frontmatter). Then output:
+
+"✓ Memory updated. Index now has [N] entries. If anything critical was missed, run `/memory-audit` to catch gaps."
+
+Then check: does `memory/MEMORY.md` reflect anything worked on today? If memory entries should have been written but MEMORY.md was not updated (e.g. a significant decision was made but no new pointer line exists), flag it explicitly:
+
+"⚠ Memory may be incomplete — [topic] was worked on but no entry appears in the index. Add manually or run `/memory-audit`."
+
+Do not silently complete if the memory step appears skipped.
+
+### Phase 6: Close out
 
 Confirm in two lines:
 

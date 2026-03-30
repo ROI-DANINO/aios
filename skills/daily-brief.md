@@ -117,6 +117,17 @@ Confirm: `Brief saved. Go build.`
 - **Goals file looks stale (30+ days old)** — Flag: "my-goals.md hasn't been updated recently — brief is based on current content."
 - **Argument passed but no matching threads** — Say: "Nothing in your open threads matches '[arg]' — proposing from goals instead."
 
+## Session Chain Reminder
+
+After presenting the agenda, always append this to your response:
+
+---
+**Session chain active:**
+- Mid-session captures: `/note "your note" #tag` — use tags: #decision #blocker #idea #next
+- End of session: run `/session-close` before you close Claude — session data won't be saved otherwise
+
+---
+
 ## Next Step
 
 After your session focus is confirmed: use `/note "text"` to capture decisions and blockers mid-session. When done, run `/session-close` to log the session and extract memory.
