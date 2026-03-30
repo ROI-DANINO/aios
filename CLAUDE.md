@@ -41,6 +41,18 @@ Skills in `skills/` are invoked as slash commands in Claude Code:
 
 The Superpowers skill library (brainstorming → plans → TDD → code review → finish branch) governs all dev work. These are installed via the Superpowers GitHub integration and listed in the session-start system reminder.
 
+### Creating New AIOS Skills
+
+After writing a new skill in `skills/`, it must be installed as a plugin so it works via the Skill tool (slash commands). Steps:
+
+1. Create `~/.claude/aios-plugins/plugins/<skill-name>/.claude-plugin/plugin.json` with name + description
+2. Create `~/.claude/aios-plugins/plugins/<skill-name>/skills/<skill-name>/SKILL.md` (copy from `skills/<skill-name>.md`)
+3. Add entry to `~/.claude/aios-plugins/.claude-plugin/marketplace.json` plugins array: `{ "name": "<skill-name>", "description": "...", "category": "productivity", "source": "./plugins/<skill-name>" }`
+4. Run: `claude plugin install <skill-name>@aios`
+5. Restart Claude Code for the new skill to appear in session
+
+**Keeping in sync:** When `skills/<skill-name>.md` is updated, copy the file to the plugin path (step 2) so they stay in sync.
+
 ## Dev Workflow
 
 All development work (e.g., Captionate v3 features) follows the Superpowers pattern enforced by `claude.md`:

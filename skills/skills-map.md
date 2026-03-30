@@ -95,6 +95,7 @@ type: reference
 
 | Skill | Domain | Triggers | What it does |
 |-------|--------|----------|--------------|
+| `skill-navigator` | system | (auto-fires every turn — not user-invocable) | Silent skill router — reads skills-map.md and invokes the right skill based on user intent |
 | `note` | utility | note this, remember this, capture this, jot down | Quick mid-session capture to notes.md |
 | `dev-audit` | dev | where am I, what's left, what phase am I in, phase status, what should I work on | Audit current dev phase — progress, blockers, next steps |
 | `systematic-debugging` | dev | bug, error, this is broken, something's broken, something's wrong, something isn't working, not working, failing, unexpected behavior | Diagnose bugs before proposing fixes |
