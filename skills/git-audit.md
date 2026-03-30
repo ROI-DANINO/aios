@@ -47,14 +47,19 @@ If this produces an empty result, ask the user:
 ```bash
 # Check .env first
 if [ -f .env ]; then
-  export $(grep GITHUB_TOKEN .env | xargs) 2>/dev/null
+  GITHUB_TOKEN=$(grep -E '^GITHUB_TOKEN=' .env | cut -d'=' -f2- | tr -d '"'"'"'')
+  export GITHUB_TOKEN
 fi
-# Fall back to existing env var
+# Fall back to existing env var — if GITHUB_TOKEN already set in shell, it stays
 # If still empty, prompt user
 ```
 
 If `GITHUB_TOKEN` is empty after both checks, say:
-> "I need a GitHub token to check remote state. Paste it here or add `GITHUB_TOKEN=ghp_...` to your `.env` — I won't echo it anywhere."
+> "I need a GitHub token to check remote state. You can either:
+> 1. Add `GITHUB_TOKEN=ghp_...` to your `.env` file (recommended — persists across sessions)
+> 2. Paste it now — I'll assign it for this session only and won't echo it back
+>
+> If you paste it, I'll set: `export GITHUB_TOKEN=<your-token>` in this session only."
 
 **Required PAT scopes:** `repo`, `workflow`
 
@@ -65,19 +70,23 @@ If `GITHUB_TOKEN` is empty after both checks, say:
 ```bash
 gh_api() {
   local ENDPOINT="$1"
+  local GH_RESP_FILE="/tmp/gh_resp_$$.json"
+  local HTTP_CODE
   HTTP_CODE=$(curl -s \
-    -o /tmp/gh_resp.json \
+    -o "$GH_RESP_FILE" \
     -w "%{http_code}" \
     -H "Authorization: Bearer $GITHUB_TOKEN" \
     -H "Accept: application/vnd.github+json" \
     -H "X-GitHub-Api-Version: 2022-11-28" \
     "https://api.github.com${ENDPOINT}")
   if [ "$HTTP_CODE" -ge 400 ]; then
-    echo "GitHub API error $HTTP_CODE:"
-    cat /tmp/gh_resp.json
+    echo "GitHub API error $HTTP_CODE:" >&2
+    cat "$GH_RESP_FILE" >&2
+    rm -f "$GH_RESP_FILE"
     return 1
   fi
-  cat /tmp/gh_resp.json
+  cat "$GH_RESP_FILE"
+  rm -f "$GH_RESP_FILE"
 }
 ```
 
