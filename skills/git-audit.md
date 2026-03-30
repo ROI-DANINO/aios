@@ -154,3 +154,103 @@ curl -s -X PUT \
 
 End with triage prompt:
 > "Here's what I found — want me to fix anything, skip, or move to stale branches?"
+
+---
+
+## Phase 2 — Stale Branches
+
+```bash
+# Get all branches with age data
+BRANCHES_JSON=$(gh_api "/repos/$GITHUB_USER/$REPO/branches?per_page=100")
+
+# For each branch, get its last commit date
+echo "$BRANCHES_JSON" | python3 -c "
+import json, sys, urllib.request, os
+from datetime import datetime, timezone
+
+branches = json.load(sys.stdin)
+now = datetime.now(timezone.utc)
+token = os.environ.get('GITHUB_TOKEN', '')
+results = []
+
+for b in branches:
+    name = b['name']
+    sha = b['commit']['sha']
+    req = urllib.request.Request(
+        f'https://api.github.com/repos/$GITHUB_USER/$REPO/commits/{sha}',
+        headers={
+            'Authorization': f'Bearer {token}',
+            'Accept': 'application/vnd.github+json',
+            'X-GitHub-Api-Version': '2022-11-28'
+        }
+    )
+    try:
+        with urllib.request.urlopen(req) as r:
+            commit = json.load(r)
+        date_str = commit['commit']['committer']['date']
+        date = datetime.fromisoformat(date_str.replace('Z', '+00:00'))
+        days_ago = (now - date).days
+        results.append({'name': name, 'days_ago': days_ago})
+    except Exception as e:
+        results.append({'name': name, 'days_ago': -1})
+
+for r in sorted(results, key=lambda x: x['days_ago'], reverse=True):
+    print(f\"{r['name']}\t{r['days_ago']}\")
+" > /tmp/branch_ages_$$.txt
+
+# Get merged branches (local git check against default branch)
+git fetch --all --quiet 2>/dev/null
+git branch -r --merged "origin/$DEFAULT_BRANCH" 2>/dev/null | \
+  sed 's|origin/||' | tr -d ' ' | grep -v "^$DEFAULT_BRANCH$" > /tmp/merged_branches_$$.txt
+```
+
+Parse results and identify:
+- Branches in `/tmp/branch_ages_$$.txt` with `days_ago >= 30` → stale
+- Branches also in `/tmp/merged_branches_$$.txt` → already merged (safe to delete)
+- Branches stale but NOT in merged list → unmerged stale (confirm before delete)
+
+Clean up temp files:
+```bash
+rm -f /tmp/branch_ages_$$.txt /tmp/merged_branches_$$.txt
+```
+
+Present findings grouped:
+
+```
+🌿  Stale Branches
+
+  ALREADY MERGED (safe to delete):
+    fix/typo-header       last commit 62 days ago    ✅ merged into main
+
+  STALE, NOT MERGED (30+ days, no activity):
+    feature/old-login     last commit 47 days ago
+    experiment/new-ui     last commit 91 days ago
+```
+
+**Auto-fix rules:**
+
+Already-merged branches → delete without confirm (safe):
+```bash
+for BRANCH in $MERGED_STALE_BRANCHES; do
+  curl -s -X DELETE \
+    -H "Authorization: Bearer $GITHUB_TOKEN" \
+    "https://api.github.com/repos/$GITHUB_USER/$REPO/git/refs/heads/$BRANCH"
+  echo "🗑️  Deleted merged branch: $BRANCH"
+done
+```
+
+Unmerged stale branches → confirm batch first:
+> "Delete these N unmerged stale branches? They haven't had activity in 30+ days and aren't merged into $DEFAULT_BRANCH. [y/n/skip]"
+
+```bash
+# Only run after explicit y from user
+for BRANCH in $UNMERGED_STALE_BRANCHES; do
+  curl -s -X DELETE \
+    -H "Authorization: Bearer $GITHUB_TOKEN" \
+    "https://api.github.com/repos/$GITHUB_USER/$REPO/git/refs/heads/$BRANCH"
+  echo "🗑️  Deleted: $BRANCH"
+done
+```
+
+End with:
+> "Here's what I found — want me to fix anything, skip, or move to commit quality?"
