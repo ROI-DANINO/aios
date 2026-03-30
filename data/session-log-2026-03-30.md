@@ -235,3 +235,22 @@ Build a skill that automatically creates skills when needed — for the self-imp
 
 ## Notes
 None
+
+---
+
+## Session 12 — 15:09
+
+## What Shipped
+- Completed skill inventory redesign — found `note.md` and `session-close.md` were the only remaining gaps (missing `## Next Step` sections)
+- Added `## Next Step` to both files and committed
+
+## Blocked / Unresolved
+- Hermes Phase 0 still not started (deferred again)
+- Auto-skill-creation skill not yet built
+- Subagent session-close gap not yet wired into prompt templates
+
+## Next Session — First Task
+Answer 4 open questions in `~/Desktop/Projects/hermes-integration/status.md`, then start Phase 0: clone and install hermes-agent
+
+## Notes
+None
