@@ -77,7 +77,6 @@ user-invocable: false
 | `land-and-deploy` | dev | land this, merge and deploy, deploy after review       | Merge PR + monitor production after code review passes |
 | `canary`    | dev     | watch production, canary deploy, monitor after deploy, post-deploy monitor | Monitor production for 30 minutes post-deploy |
 | `document-release` | dev | document this release, release notes, generate release docs | Generate release documentation |
-| `retro`     | dev     | retro, retrospective, end of sprint, what did we learn     | Sprint retro — shipped, missed, next focus           |
 
 ---
 
