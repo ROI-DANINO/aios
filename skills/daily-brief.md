@@ -1,12 +1,12 @@
 ---
 name: daily-brief
 description: >
-  Session-start orientation. Reads context/my-goals.md, scans data/notes.md for
-  yesterday's notes, checks deliverables/ for open plans, and proposes a focused
-  session agenda — 1 to 3 tasks max. Confirms focus with Roi, then writes the brief
-  to data/daily-brief-YYYY-MM-DD.md. Use when user says "/daily-brief", "start my
-  session", "what should I work on", "give me my brief", "orient me", or at the start
-  of any working session.
+  Project-aware session-start orientation. In AIOS: reads context/my-goals.md, scans
+  data/notes.md for yesterday's notes, checks deliverables/ for open plans, proposes a
+  focused session agenda 1–3 tasks max. In other projects: reads status.md + plan.md +
+  recent git log and proposes a focused brief. Confirms focus, writes brief to
+  data/daily-brief-YYYY-MM-DD.md. Use when user says "/daily-brief", "start my session",
+  "what should I work on", "give me my brief", "orient me", or at the start of any session.
 user-invocable: true
 argument-hint: "[optional focus area, e.g. 'backend']"
 tools:
@@ -26,6 +26,87 @@ Session start. Cut the fog. Pick your focus before you open a file.
 - User feels directionless or wants rails before starting
 
 ## Process
+
+### Phase 0: Detect project mode (silent)
+
+Check if `context/my-goals.md` exists in the current working directory.
+
+- **File exists** → **AIOS mode**: proceed to Phase 1 as normal (all existing behavior unchanged).
+- **File does not exist** → **Generic mode**: skip Phase 1–4 entirely. Run the generic brief below instead.
+
+---
+
+#### Generic Brief (non-AIOS projects)
+
+1. Note the current project name (basename of working directory).
+2. Read `status.md` if it exists. Extract: Current Focus, Blockers, Next Action.
+3. Read `plan.md` if it exists. Extract the current phase or active milestone (first heading after any completed sections).
+4. Run `git log --oneline -5` to get the 5 most recent commits. Summarize what's been happening.
+5. If an argument was passed (e.g. `/daily-brief backend`), treat it as a focus constraint.
+
+Present this compact block:
+
+```
+**Project:** [cwd basename]
+
+**Status:** [Current Focus from status.md — or "No status.md found."]
+**Blockers:** [from status.md — or "None."]
+**Next action:** [from status.md — or "Not specified."]
+
+**Plan phase:** [current phase from plan.md — or "No plan.md found."]
+
+**Recent commits:**
+- [commit 1]
+- [commit 2]
+- [commit 3]
+
+**Proposed focus — pick 1:**
+1. [Next action from status.md, or inferred from most recent commits]
+2. [Second option only if genuinely ambiguous]
+```
+
+Then ask exactly:
+> "Which one are you starting with — or does something else take priority today?"
+
+Wait. Do not suggest more options.
+
+After confirmation, write `data/daily-brief-YYYY-MM-DD.md` (create `data/` if needed):
+
+```markdown
+# Daily Brief — YYYY-MM-DD
+
+## Session Focus
+[confirmed task]
+
+## Project Status
+[status.md summary, or "No status.md"]
+
+## Plan Phase
+[plan.md phase, or "No plan.md"]
+
+## Recent Commits
+[5-line git log]
+```
+
+Confirm: `Brief saved. Go build.`
+
+Append session chain reminder:
+
+---
+**Session chain active:**
+- Mid-session captures: `/note "your note" #tag` — use tags: #decision #blocker #idea #next
+- End of session: run `/session-close` before you close Claude — session data won't be saved otherwise
+
+---
+
+#### Generic Mode Edge Cases
+
+- **No status.md and no plan.md** — Skip those sections. Use git log only. Say: "No status.md or plan.md found — basing brief on recent commits."
+- **data/ doesn't exist** — Create it before writing.
+- **Empty git log** — Say: "No commits yet. What are you starting with?"
+- **Argument passed but nothing matches** — Say: "Nothing in your project files matches '[arg]' — proposing from recent commits instead."
+
+---
 
 ### Phase 1: Load context (silent — do not narrate this to the user)
 
