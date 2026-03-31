@@ -60,9 +60,10 @@ feed back into AIOS via shared files + MEMORY.md
 **Effort:** ~3h
 **Goal:** AIOS memory files become Hermes's starting context. One source of truth.
 
-- [ ] Create `memory/hermes-bridge.md` — compiled snapshot of AIOS context for Hermes MEMORY.md
-- [ ] Write `scripts/sync-memory-to-hermes.ts` (Bun) — reads AIOS memory/ + context/, writes to Hermes MEMORY.md location
-- [ ] Add `/memory-sync` AIOS skill that calls this script
+- [ ] Adopt `shared-memory-mcp` as the memory bridge — replaces manual sync script
+  - ⚠️ **Verify storage backend before committing** — confirm SQLite vs. other backend fits AIOS needs
+- [ ] Configure shared-memory-mcp to read AIOS memory/ + context/ as its source
+- [ ] Add `/memory-sync` AIOS skill that triggers shared-memory-mcp sync
 - [ ] Update `session-close` skill to call `/memory-sync` before ending
 
 **What this unlocks:** Hermes knows who you are and what you're building without re-explaining every session.
@@ -90,9 +91,9 @@ feed back into AIOS via shared files + MEMORY.md
 **Effort:** ~3h
 **Goal:** AIOS skills can invoke Hermes tools when they need real execution (browser, code eval, search).
 
-- [ ] Create `scripts/hermes-tool.sh` — wrapper: `hermes run --skill <skill> --input "<json>"`
-- [ ] Update `conductor.md`: when task needs real tool execution, spawn Hermes headless session
-- [ ] Update `pod.md` Coder agent to delegate execution steps to Hermes when needed
+- [ ] Adopt `steipete/claude-code-mcp` — replaces hermes-tool.sh wrapper approach
+- [ ] Configure claude-code-mcp so AIOS skills can invoke it for real tool execution (browser, code eval, search)
+- [ ] Update `pod.md` Coder agent to delegate execution steps via claude-code-mcp when needed
 
 **This is not a full merge** — AIOS says "I need browser control, hand off to Hermes for this step."
 
@@ -112,7 +113,7 @@ feed back into AIOS via shared files + MEMORY.md
 ---
 
 ### Phase 5 — Multi-Agent Coordination
-**Effort:** ~4h
+**Effort:** ~2h _(reduced from ~4h — Phase 3's claude-code-mcp adoption covers the core tool bridge; this phase now focuses on orchestration wiring only)_
 **Goal:** Dev Pod delegates execution to Hermes agents. AIOS orchestrates, Hermes executes.
 
 - [ ] Dev Pod stays as orchestrator (planning, gates, PR review)

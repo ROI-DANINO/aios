@@ -22,6 +22,12 @@ oh-my-pi (github.com/can1357/oh-my-pi) is being integrated as the primary execut
 
 **Why:** Wanted all three agents (Claude Code, Hermes, Pi) doing what they do best as a codependent system. Pi handles multi-model/parallel implementation, Hermes handles persistent memory + heavy tools, Claude Code orchestrates.
 
+**Messaging layer decisions (2026-03-31):**
+- **CC↔CC:** `claude-peers-mcp` — MCP server for Claude Code to Claude Code communication
+- **Pi+Claude:** Overstory — coordinates Pi + Claude Code in mixed teams (shared SQLite mail + git worktrees)
+- **TUI:** Conduit — terminal UI layer for the system
+- **Agent-MCP:** explicitly rejected
+
 **Branch:** `feature/pi-agent-integration`
 
 **How to apply:** When designing the tri-agent system spec, refer to this decision. Don't reopen the approach question — Approach B is locked.

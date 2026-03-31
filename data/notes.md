@@ -40,3 +40,12 @@ Idea parking lot — Paperclip integration: (1) automated research/data collecti
 
 ### [2026-03-30] — hermes-integration
 Answer 4 open questions in ~/Desktop/Projects/hermes-integration/status.md, then Phase 0: clone + install hermes-agent #next
+
+### [2026-03-31] — AIOS
+Register 6 new skills as AIOS plugins so they appear as slash commands (agent-config, memory-audit, context-loader, handoff, tool-registry, session-health) — per CLAUDE.md plugin install steps #next
+
+### [2026-03-31] — AIOS
+User made changes to dispatch (superpowers:dispatching-parallel-agents or pod dispatch) on mobile — review and reconcile with agent taxonomy work before next session #next
+
+### [2026-03-31] — AIOS
+6 new skills registered as AIOS plugins and installed — agent-config, memory-audit, context-loader, handoff, tool-registry, session-health now available as slash commands. Restart Claude Code to activate. #decision
