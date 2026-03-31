@@ -1,0 +1,6 @@
+# oh-my-pi agent definition
+# Source: ../../.claude/agents/developer.md
+name: Developer
+model: claude-sonnet-4-6
+permissionMode: acceptEdits
+source: ../../.claude/agents/developer.md

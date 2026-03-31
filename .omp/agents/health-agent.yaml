@@ -1,0 +1,6 @@
+# oh-my-pi agent definition
+# Source: ../../.claude/agents/health-agent.md
+name: HealthAgent
+model: claude-sonnet-4-6
+permissionMode: default
+source: ../../.claude/agents/health-agent.md

@@ -1,0 +1,6 @@
+# oh-my-pi agent definition
+# Source: ../../.claude/agents/analyst.md
+name: Analyst
+model: claude-sonnet-4-6
+permissionMode: default
+source: ../../.claude/agents/analyst.md

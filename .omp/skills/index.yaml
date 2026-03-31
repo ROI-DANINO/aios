@@ -1,0 +1,49 @@
+# oh-my-pi skills index
+# Points to AIOS skill source files.
+skills:
+  - name: aios-health
+    source: ../../skills/aios-health.md
+  - name: agent-config
+    source: ../../skills/agent-config.md
+  - name: context-clean
+    source: ../../skills/context-clean.md
+  - name: context-loader
+    source: ../../skills/context-loader.md
+  - name: daily-brief
+    source: ../../skills/daily-brief.md
+  - name: dev-audit
+    source: ../../skills/dev-audit.md
+  - name: git-audit
+    source: ../../skills/git-audit.md
+  - name: handoff
+    source: ../../skills/handoff.md
+  - name: init
+    source: ../../skills/init.md
+  - name: memory-audit
+    source: ../../skills/memory-audit.md
+  - name: note
+    source: ../../skills/note.md
+  - name: pod
+    source: ../../skills/pod.md
+  - name: pod-review
+    source: ../../skills/pod-review.md
+  - name: session-close
+    source: ../../skills/session-close.md
+  - name: session-health
+    source: ../../skills/session-health.md
+  - name: session-redo
+    source: ../../skills/session-redo.md
+  - name: skill-navigator
+    source: ../../skills/skill-navigator.md
+  - name: skill-scan
+    source: ../../skills/skill-scan.md
+  - name: skills-map
+    source: ../../skills/skills-map.md
+  - name: system-architect
+    source: ../../skills/system-architect.md
+  - name: tool-registry
+    source: ../../skills/tool-registry.md
+  - name: ux-gate
+    source: ../../skills/ux-gate.md
+  - name: ux-scan
+    source: ../../skills/ux-scan.md

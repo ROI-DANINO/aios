@@ -1,0 +1,6 @@
+# oh-my-pi agent definition
+# Source: ../../.claude/agents/scrum-master.md
+name: ScrumMaster
+model: claude-haiku-4-5-20251001
+permissionMode: default
+source: ../../.claude/agents/scrum-master.md

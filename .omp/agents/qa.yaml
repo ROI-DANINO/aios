@@ -1,0 +1,6 @@
+# oh-my-pi agent definition
+# Source: ../../.claude/agents/qa.md
+name: QA
+model: claude-sonnet-4-6
+permissionMode: acceptEdits
+source: ../../.claude/agents/qa.md

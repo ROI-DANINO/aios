@@ -1,0 +1,6 @@
+# oh-my-pi agent definition
+# Source: ../../.claude/agents/session-agent.md
+name: SessionAgent
+model: claude-haiku-4-5-20251001
+permissionMode: acceptEdits
+source: ../../.claude/agents/session-agent.md

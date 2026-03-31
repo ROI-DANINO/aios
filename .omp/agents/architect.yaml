@@ -1,0 +1,6 @@
+# oh-my-pi agent definition
+# Source: ../../.claude/agents/architect.md
+name: Architect
+model: claude-opus-4-6
+permissionMode: acceptEdits
+source: ../../.claude/agents/architect.md
