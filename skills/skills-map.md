@@ -26,9 +26,7 @@ user-invocable: false
 
 | Skill | Domain | Triggers | What it does |
 |-------|--------|----------|--------------|
-| `business-setup` | business | set up my business, onboard, configure AIOS, I'm new, reconfigure | Full onboarding wizard — captures identity, voice, ICP, GTM, tools, goals |
 | `offer-engine` | business | build my offer, what should I sell, define my offer, audit my offer, ICP missing | Build or audit a business offer from scratch |
-| `pod-mapper` | business | map my workflows, audit this department, break down acquisition/delivery/support/ops | Map a business function into automatable workflows |
 | `system-architect` | system | design my system, architecture, how should I structure AIOS | Architecture design walkthrough for AIOS itself |
 
 ---
@@ -103,9 +101,7 @@ user-invocable: false
 | `verification-before-completion` | dev | is this done yet, let me verify, check before I commit, make sure this works, verify this works | Verify before claiming done — evidence first |
 | `writing-skills` | system | create a skill, new skill, update this skill, improve this skill | Create or improve skills — always update skills-map after |
 | `skill-scan` | system | scan my skills, audit the skill registry, skill-scan, what skills are broken, orphaned, check skill wiring | Audit all skills — finds missing registrations, duplicates, chain gaps; writes dated report + feeds backlog |
-| `office-hours` | dev  | I'm stuck, think this through, office hours, help me reason | Unstructured problem-solving session               |
 | `browse`       | dev  | browse, open URL, scrape, automate this page, go to URL    | Real Chromium automation via Playwright              |
-| `conductor`    | dev  | run in parallel, spin up agents, conductor, multiple workstreams | Parallel Claude Code sessions for independent tasks |
 | `setup-browser-cookies` | dev | import cookies, browser auth, set up cookies, authenticate browser | Import cookies from Chrome/Arc/Brave/Edge for authenticated pages |
 | `connect-chrome` | dev | connect chrome, chrome sidebar, browser integration | Browser integration setup (Chrome sidebar) |
 | `codex`        | dev  | codex review, adversarial review, ask codex, second opinion | Three OpenAI Codex review modes: code review, adversarial, open consultation |
@@ -139,8 +135,8 @@ Quick reference for skill sequencing. Each `→` is a hard handoff defined in th
 |---|---|
 | **Session loop** | `/daily-brief` → (work) → `/note` → `/session-close` → next day `/daily-brief` |
 | **Dev pipeline** | `/dev-audit` → `/qa` → `/cso` → `/ship` → `/retro` |
-| **Project setup** | `/init` → `/system-architect` → `/business-setup` or dev pipeline |
-| **Business** | `/business-setup` → `/pod-mapper` → `/pod` |
+| **Project setup** | `/init` → `/system-architect` → `superpowers:business-setup` or dev pipeline |
+| **Business** | `superpowers:business-setup` → `superpowers:pod-mapper` → `/pod` |
 | **Multi-agent** | `/pod` → `/pod-review` → `superpowers:finishing-a-development-branch` |
 | **UX** | `/ux-gate` → (build) → `/ux-scan` → `/dev-audit` |
 | **Maintenance** | every 3-5 sessions: `/daily-brief` (if 5+ open #next threads) → `/context-clean` |
