@@ -73,6 +73,14 @@ Output:
 **Recommendation:** [One-line summary — e.g., "All clear. Start working." or "Run /context-clean before this session — notes backlog is heavy."]
 ```
 
+## Skill Orientation
+
+If this is the start of a working session and you're not sure which skill to run next, append this line to the health summary output:
+
+> **Not sure where to start?** Run `/skills-map` for a full indexed skill reference — organized by session phase, dev workflow, and AIOS system tools.
+
+Only append this line if the user has NOT passed any intent (e.g., they just typed `/session-health` with nothing else). If they said "session-health then I want to work on X", skip this line — they already know what they're doing.
+
 ## Edge Cases
 
 - **data/ dir empty or missing** — Flag and note: "No session logs found. This may be a fresh install."
@@ -82,6 +90,7 @@ Output:
 
 ## See Also
 
+- `/skills-map` — full indexed skill reference, organized by workflow phase
 - `/memory-audit` — deeper memory health check with pointer verification
 - `/context-clean` — clears notes backlog and archives stale data
 - `/agent-config` — add or fix missing agents
