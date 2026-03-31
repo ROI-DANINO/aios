@@ -39,15 +39,17 @@ oh-my-pi as runtime (future)
 - Architecture decision made
 - Research compiled and committed
 
-**What needs to be built (in order):**
-1. Install BMAD Claude Code fork (aj-geddes/claude-code-bmad-skills → ~/.claude/skills/)
-2. Design agent taxonomy — map existing AIOS skills to BMAD roles + AIOS-specific agents
-3. Create agent definition files (.claude/agents/) with tools allowlist + permissions
-4. Fix broken session chain (daily-brief → note → session-close → memory → context-clean)
-5. Add tools: frontmatter to all existing skills
-6. Merge/discard duplicate skills (8 AIOS skills duplicated by gstack/superpowers)
-7. Write 6 missing placeholder skills (agent-config, memory-audit, context-loader, handoff, tool-registry, session-health)
-8. Sync to oh-my-pi format (.omp/agents/, .omp/skills/) when ready
+**Status: COMPLETE — 2026-03-31**
+
+All 8 build steps executed:
+1. ✅ BMAD Claude Code fork installed (~/.claude/skills/ — bmad-v6 layout)
+2. ✅ Agent taxonomy designed (deliverables/agent-taxonomy-2026-03-30.md)
+3. ✅ Agent definitions created (.claude/agents/ — 8 agents)
+4. ✅ Session chain fixed (daily-brief enforcement, memory confirmation, dynamic project detection in note)
+5. ✅ tools: frontmatter added to all 13 core AIOS skills
+6. ✅ 5 duplicate skills deleted (office-hours, retro, conductor, pod-mapper, business-setup); pod.md + pod-review.md kept (unique Gate 1/2 logic)
+7. ✅ 6 missing skills written (agent-config, memory-audit, context-loader, handoff, tool-registry, session-health)
+8. ✅ oh-my-pi sync scaffold created (.omp/agents/, .omp/skills/index.yaml, scripts/sync-agents-to-omp.sh)
 
 **Why:** Dogfooding AIOS while building it as a product. Both personal use and product development.
 
