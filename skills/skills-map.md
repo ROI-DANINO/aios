@@ -18,6 +18,7 @@ user-invocable: false
 |-------|--------|----------|--------------|
 | `using-superpowers` | system | session start, new conversation, first message | Loads skill rules and routing behavior |
 | `daily-brief` | business | start of day, what should I work on, morning, orient me, what's on my plate | Reads goals, surfaces yesterday's notes, proposes focused agenda |
+| `session-health` | system | /session-health, quick health check, is my session state okay, anything broken before we start | 30-second sanity check — memory index, last session log, notes backlog, agent roster |
 | `init` | system | /init, set up this project, tidy this project, onboard this project, initialize, help me organize, starting fresh on this project, starting a new project, help me set up this project | Scans project dir, interviews user, proposes tidy structure, moves files with approval, registers in AIOS memory |
 
 ---
@@ -77,6 +78,7 @@ user-invocable: false
 | `land-and-deploy` | dev | land this, merge and deploy, deploy after review       | Merge PR + monitor production after code review passes |
 | `canary`    | dev     | watch production, canary deploy, monitor after deploy, post-deploy monitor | Monitor production for 30 minutes post-deploy |
 | `document-release` | dev | document this release, release notes, generate release docs | Generate release documentation |
+| `handoff`   | dev     | handoff, hand this off, pass to QA, ready for developer, handoff protocol | Write structured handoff artifact between agent roles |
 
 ---
 
@@ -99,7 +101,13 @@ user-invocable: false
 | `systematic-debugging` | dev | bug, error, this is broken, something's broken, something's wrong, something isn't working, not working, failing, unexpected behavior | Diagnose bugs before proposing fixes |
 | `verification-before-completion` | dev | is this done yet, let me verify, check before I commit, make sure this works, verify this works | Verify before claiming done — evidence first |
 | `writing-skills` | system | create a skill, new skill, update this skill, improve this skill | Create or improve skills — always update skills-map after |
-| `skill-scan` | system | scan my skills, audit the skill registry, skill-scan, what skills are broken, orphaned, check skill wiring | Audit all skills — finds missing registrations, duplicates, chain gaps; writes dated report + feeds backlog |
+| `skill-scan` | system | /skill-scan, audit skills, scan skills, skill audit, check skills, what skills are broken, what skills are missing | Full skill audit — finds missing registrations, chain gaps, duplicates. Saves tiered report + feeds backlog. Optional interactive triage per finding. |
+| `context-clean` | system | /context-clean, clean up AIOS data, prune data, compact notes, AIOS maintenance, data is getting fat | Periodic maintenance — archive stale daily-briefs/scan reports, compact notes.md, check memory health |
+| `aios-health`  | system | /aios-health, audit my AIOS, system health check, how healthy is my AIOS, full AIOS audit, something feels off with my system | Full system audit — 5 parallel subagents covering skill health, memory, data hygiene, self-improvement, token efficiency. Report saved to data/, auto-fixes with confirmation, conditional context-clean |
+| `memory-audit` | system | /memory-audit, audit memory, memory health, something off with my memory | Targeted memory health check — verify MEMORY.md pointers, flag stale entries, find contradictions |
+| `agent-config` | system | /agent-config, show me the agents, add a new agent, update agent permissions, what agents do I have | Manage .claude/agents/ — view roster, inspect, edit, or add agents via wizard |
+| `tool-registry` | system | /tool-registry, what tools does X agent have, can X agent do Y, show tool allowlists | Read-only catalog of tool allowlists for all 8 AIOS agent roles |
+| `context-loader` | system | /context-loader, load context for X, what context is relevant for Y | Selectively load only context/ files matched to the current task — reduces token waste |
 | `browse`       | dev  | browse, open URL, scrape, automate this page, go to URL    | Real Chromium automation via Playwright              |
 | `setup-browser-cookies` | dev | import cookies, browser auth, set up cookies, authenticate browser | Import cookies from Chrome/Arc/Brave/Edge for authenticated pages |
 | `connect-chrome` | dev | connect chrome, chrome sidebar, browser integration | Browser integration setup (Chrome sidebar) |
@@ -107,9 +115,6 @@ user-invocable: false
 | `benchmark`    | dev  | benchmark this, performance test, measure speed            | Performance benchmarking and analysis                |
 | `gstack-upgrade` | system | update gstack, upgrade skills, latest gstack           | Update gstack to latest version                      |
 | `git-audit`    | dev    | git audit, scan this repo, stale branches, commit quality, repo health, github audit, /git-audit | Interactive git + GitHub repo audit — 4 phases, auto-fix safe issues, optional structured report |
-| `skill-scan`   | system | /skill-scan, audit skills, scan skills, skill audit, check skills, what skills are broken, what skills are missing | Full skill audit — finds missing registrations, chain gaps, duplicates. Saves tiered report + feeds backlog. Optional interactive triage per finding. |
-| `context-clean` | system | /context-clean, clean up AIOS data, prune data, compact notes, AIOS maintenance, data is getting fat | Periodic maintenance — archive stale daily-briefs/scan reports, compact notes.md, check memory health |
-| `aios-health`  | system | /aios-health, audit my AIOS, system health check, how healthy is my AIOS, full AIOS audit, something feels off with my system | Full system audit — 5 parallel subagents covering skill health, memory, data hygiene, self-improvement, token efficiency. Report saved to data/, auto-fixes with confirmation, conditional context-clean |
 
 ---
 
@@ -122,21 +127,20 @@ user-invocable: false
 
 ---
 
-<!-- NEW SKILLS APPENDED BELOW BY update-skills-map.sh — REVIEW PLACEMENT -->
-
----
-
 ## Workflow Chains
 
 Quick reference for skill sequencing. Each `→` is a hard handoff defined in the skill file.
 
 | Chain | Sequence |
 |---|---|
-| **Session loop** | `/daily-brief` → (work) → `/note` → `/session-close` → next day `/daily-brief` |
+| **Session loop** | `/session-health` → `/daily-brief` → (work) → `/note` → `/session-close` → next day `/daily-brief` |
 | **Dev pipeline** | `/dev-audit` → `/qa` → `/cso` → `/ship` → `/retro` |
 | **Project setup** | `/init` → `/system-architect` → `superpowers:business-setup` or dev pipeline |
 | **Business** | `superpowers:business-setup` → `superpowers:pod-mapper` → `/pod` |
-| **Multi-agent** | `/pod` → `/pod-review` → `superpowers:finishing-a-development-branch` |
+| **Multi-agent** | `/pod` → `/handoff` → `/pod-review` → `superpowers:finishing-a-development-branch` |
 | **UX** | `/ux-gate` → (build) → `/ux-scan` → `/dev-audit` |
 | **Maintenance** | every 3-5 sessions: `/daily-brief` (if 5+ open #next threads) → `/context-clean` |
 | **Health audit** | `/aios-health` → (conditional) `/context-clean` |
+| **Context** | `/context-loader "task"` → load only relevant files → (work) |
+
+<!-- NEW SKILLS APPENDED BELOW BY update-skills-map.sh — REVIEW PLACEMENT -->
