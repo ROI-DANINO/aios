@@ -1,6 +1,9 @@
 ---
 name: skills-map
-description: Layered reference of all AIOS and Superpowers skills — organized by workflow phase, domain, and trigger phrases. Used by skill-navigator and as a personal cheat sheet.
+description: >
+  Start here for skill discovery. Full indexed reference of all AIOS and Superpowers skills —
+  organized by workflow phase (session start → dev pipeline → AIOS system → session close),
+  domain, and trigger phrases. Used by skill-navigator and as a personal cheat sheet.
 type: reference
 user-invocable: false
 ---
@@ -9,6 +12,13 @@ user-invocable: false
 
 > Organized by workflow phase. Each skill shows its domain, trigger phrases, and what it does.
 > **Domains:** `business` · `dev` · `system` · `utility`
+>
+> **Skill tiers at a glance:**
+> - **Phase 1 (Session Start):** Run these first — they orient, never break anything
+> - **Phase 3 (Dev Work):** The Superpowers pipeline — always in order for feature work
+> - **Phase 4 (Anytime):** Run any time during a session as needed
+> - **Phase 3b / AIOS System:** AIOS system maintenance — only run in the AIOS project
+> - **Phase 5 (Session Close):** Always end with `/session-close`
 
 ---
 
@@ -17,7 +27,7 @@ user-invocable: false
 | Skill | Domain | Triggers | What it does |
 |-------|--------|----------|--------------|
 | `using-superpowers` | system | session start, new conversation, first message | Loads skill rules and routing behavior |
-| `daily-brief` | business | start of day, what should I work on, morning, orient me, what's on my plate | Reads goals, surfaces yesterday's notes, proposes focused agenda |
+| `daily-brief` | business | start of day, what should I work on, morning, orient me, what's on my plate | Project-aware brief: full AIOS orientation in AIOS, generic status+git brief in other projects |
 | `session-health` | system | /session-health, quick health check, is my session state okay, anything broken before we start | 30-second sanity check — memory index, last session log, notes backlog, agent roster |
 | `init` | system | /init, set up this project, tidy this project, onboard this project, initialize, help me organize, starting fresh on this project, starting a new project, help me set up this project | Scans project dir, interviews user, proposes tidy structure, moves files with approval, registers in AIOS memory |
 
